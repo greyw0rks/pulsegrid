@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-11-03T08:18:43.091Z",
+  "network": "Portaldot V3 testnet",
+  "expectedChainId": 420420777,
+  "expectedHex": "0x190f1ca9",
+  "evm": {
+    "url": "https://test-evm-rpc-v3.portaldot.dev",
+    "checkedAt": "2026-11-03T08:18:39.475Z",
+    "methods": [
+      "eth_chainId",
+      "eth_blockNumber"
+    ],
+    "simulated": false,
+    "chainId": 420420777,
+    "blockHeight": "303539",
+    "genesisHash": null,
+    "warnings": [],
+    "success": true,
+    "latencyMs": 2595,
+    "errorCode": null,
+    "latestBlockHash": "0x3f369944239c619c243ea319200736c1fb3bd5a6e11c0fa152791eaf0cc83f13",
+    "latestBlockTimestamp": "2026-11-03T08:18:42.000Z"
+  },
+  "native": {
+    "url": "wss://test-node-v3.portaldot.dev",
+    "checkedAt": "2026-11-03T08:18:39.551Z",
+    "methods": [
+      "chain_getHeader",
+      "system_health",
+      "chain_getBlockHash"
+    ],
+    "simulated": false,
+    "chainId": null,
+    "blockHeight": "303539",
+    "genesisHash": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "warnings": [],
+    "success": true,
+    "latencyMs": 2868,
+    "errorCode": null
+  },
+  "transactionExecutionVerified": false,
+  "contractDeploymentVerified": false,
+  "note": "Public RPC reads only. Native block telemetry does not identify or map validators."
+}

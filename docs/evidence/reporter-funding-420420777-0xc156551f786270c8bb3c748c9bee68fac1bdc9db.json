@@ -1,0 +1,80 @@
+{
+  "schema": "pulsegrid.reporter-funding.v1",
+  "checkedAt": "2026-11-03T08:54:30.603Z",
+  "chainId": 420420777,
+  "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+  "source": "5DkyaZCdhQH848vkZBxp6bPEVcn78bpKf3rhtwRn5tb8VrJv",
+  "reporter": "0xC156551F786270C8bb3c748c9Bee68FaC1bdC9DB",
+  "destination": "5GSCkAWEAgEQdsxyPYeJ3RE5sjcXCus4VxCG6JnZSiFKhbSK",
+  "amountAtomic": "30000000000000000",
+  "estimatedFeeAtomic": "1500415253352",
+  "status": "finalized",
+  "transactionHash": "0x6c1da711f633dd8a64dcf63570b1d7faf979cd3ebeebacd0fcce33f6e2d2202a",
+  "blockHash": "0xcd7414178f4b2e3175f2822d5a1f23edeb7b681658578e764a6072f9eec569e3",
+  "events": [
+    {
+      "section": "balances",
+      "method": "Withdraw",
+      "data": [
+        "5DkyaZCdhQH848vkZBxp6bPEVcn78bpKf3rhtwRn5tb8VrJv",
+        1500415253352
+      ]
+    },
+    {
+      "section": "system",
+      "method": "NewAccount",
+      "data": [
+        "5GSCkAWEAgEQdsxyPYeJ3RE5sjcXCus4VxCG6JnZSiFKhbSK"
+      ]
+    },
+    {
+      "section": "balances",
+      "method": "Endowed",
+      "data": [
+        "5GSCkAWEAgEQdsxyPYeJ3RE5sjcXCus4VxCG6JnZSiFKhbSK",
+        "0x0000000000000000006a94d74f430000"
+      ]
+    },
+    {
+      "section": "balances",
+      "method": "Transfer",
+      "data": [
+        "5DkyaZCdhQH848vkZBxp6bPEVcn78bpKf3rhtwRn5tb8VrJv",
+        "5GSCkAWEAgEQdsxyPYeJ3RE5sjcXCus4VxCG6JnZSiFKhbSK",
+        "0x0000000000000000006a94d74f430000"
+      ]
+    },
+    {
+      "section": "balances",
+      "method": "Deposit",
+      "data": [
+        "5EYCAe5ijiYfyeZ2JJCGq56LmPyNRAKzpG4QkoQkkQNB5e6Z",
+        1500415253352
+      ]
+    },
+    {
+      "section": "transactionPayment",
+      "method": "TransactionFeePaid",
+      "data": [
+        "5DkyaZCdhQH848vkZBxp6bPEVcn78bpKf3rhtwRn5tb8VrJv",
+        1500415253352,
+        0
+      ]
+    },
+    {
+      "section": "system",
+      "method": "ExtrinsicSuccess",
+      "data": [
+        {
+          "weight": {
+            "refTime": 764602000,
+            "proofSize": 15777
+          },
+          "class": "Normal",
+          "paysFee": "Yes"
+        }
+      ]
+    }
+  ],
+  "evmBalanceWei": "299900000000000000000"
+}

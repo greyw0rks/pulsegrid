@@ -1,0 +1,1629 @@
+{
+  "checkedAt": "2026-11-03T08:35:55.908Z",
+  "network": "Portaldot V3 testnet",
+  "address": "5DkyaZCdhQH848vkZBxp6bPEVcn78bpKf3rhtwRn5tb8VrJv",
+  "account": {
+    "nonce": 0,
+    "consumers": 0,
+    "providers": 1,
+    "sufficients": 0,
+    "data": {
+      "free": "0x000000000000000000b1a2bc2ec50000",
+      "reserved": 0,
+      "frozen": 0,
+      "flags": "0x80000000000000000000000000000000"
+    }
+  },
+  "properties": {
+    "isEthereum": false,
+    "ss58Format": 42,
+    "tokenDecimals": [
+      14
+    ],
+    "tokenSymbol": [
+      "tPOT"
+    ]
+  },
+  "chain": "PortaldotV3 Test",
+  "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+  "runtime": {
+    "specName": "portaldot-v3",
+    "implName": "portaldot-v3-node",
+    "authoringVersion": 10,
+    "specVersion": 3002,
+    "implVersion": 0,
+    "apis": [
+      [
+        "0x17a6bc0d0062aeb3",
+        1
+      ],
+      [
+        "0x18ef58a3b67ba770",
+        1
+      ],
+      [
+        "0xcbca25e39f142387",
+        2
+      ],
+      [
+        "0x687ad44ad37f03c2",
+        1
+      ],
+      [
+        "0x6ef953004ba30e59",
+        1
+      ],
+      [
+        "0xbc9d89904f5b923f",
+        1
+      ],
+      [
+        "0x8453b50b22293977",
+        1
+      ],
+      [
+        "0x68b66ba122c93fa7",
+        2
+      ],
+      [
+        "0x37c8bb1350a9a2a8",
+        4
+      ],
+      [
+        "0x8a8047a53a8277ec",
+        1
+      ],
+      [
+        "0xf3ff14d5ab527059",
+        3
+      ],
+      [
+        "0x899a250cbe84f250",
+        1
+      ],
+      [
+        "0x49eaaf1b548a0cb0",
+        6
+      ],
+      [
+        "0x91d5df18b0d2cf58",
+        3
+      ],
+      [
+        "0x6fd7c327202e4a8d",
+        1
+      ],
+      [
+        "0xab3c0572291feb8b",
+        2
+      ],
+      [
+        "0x3b1cfc440dd23f49",
+        2
+      ],
+      [
+        "0xfbc577b9d747efd6",
+        1
+      ],
+      [
+        "0x8c403e5c4a9fd442",
+        2
+      ],
+      [
+        "0xdf6acb689907609b",
+        5
+      ],
+      [
+        "0x37e397fc7c91f5e4",
+        2
+      ],
+      [
+        "0xccd9de6396c899ca",
+        1
+      ],
+      [
+        "0x40fe3ad401f8959a",
+        6
+      ],
+      [
+        "0xd2bc9897eed08f15",
+        3
+      ],
+      [
+        "0xf78b278be53f454c",
+        2
+      ],
+      [
+        "0xed99c5acb25eedf5",
+        3
+      ]
+    ],
+    "transactionVersion": 2,
+    "stateVersion": 1
+  },
+  "pallets": [
+    "System",
+    "Utility",
+    "Babe",
+    "Timestamp",
+    "Authorship",
+    "Indices",
+    "Balances",
+    "TransactionPayment",
+    "AssetConversionTxPayment",
+    "ElectionProviderMultiPhase",
+    "Staking",
+    "Session",
+    "TechnicalCommittee",
+    "TechnicalMembership",
+    "Grandpa",
+    "Treasury",
+    "AssetRate",
+    "Contracts",
+    "Sudo",
+    "ImOnline",
+    "AuthorityDiscovery",
+    "Offences",
+    "Historical",
+    "Identity",
+    "Recovery",
+    "Vesting",
+    "Scheduler",
+    "Preimage",
+    "Proxy",
+    "Multisig",
+    "Bounties",
+    "Assets",
+    "PoolAssets",
+    "Beefy",
+    "Mmr",
+    "MmrLeaf",
+    "Lottery",
+    "Uniques",
+    "Nfts",
+    "NftFractionalization",
+    "TransactionStorage",
+    "VoterList",
+    "ChildBounties",
+    "Remark",
+    "NominationPools",
+    "AssetConversion",
+    "FastUnstake",
+    "MessageQueue",
+    "TxPause",
+    "SafeMode",
+    "Statement",
+    "MultiBlockMigrations",
+    "Broker",
+    "Mixnet",
+    "Parameters",
+    "SkipFeelessPayment",
+    "AssetConversionMigration",
+    "Revive",
+    "VerifySignature",
+    "DelegatedStaking",
+    "AssetsFreezer",
+    "Oracle",
+    "MetaTx",
+    "MultiAssetBounties",
+    "AssetsPrecompiles",
+    "AssetsPrecompilesPermit",
+    "VestingPrecompiles",
+    "RegistrarPara",
+    "RegistrarRelay"
+  ],
+  "execution": {
+    "contracts": {
+      "callOldWeight": {
+        "name": "call_old_weight",
+        "fields": [
+          {
+            "name": "dest",
+            "type": 0,
+            "typeName": "AccountIdLookupOf<T>",
+            "docs": []
+          },
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "gas_limit",
+            "type": 24,
+            "typeName": "OldWeight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 153,
+            "typeName": "Option<<BalanceOf<T> as codec::HasCompact>::Type>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 0,
+        "docs": [
+          "Deprecated version if [`Self::call`] for use in an in-storage `Call`."
+        ],
+        "args": [
+          {
+            "name": "dest",
+            "type": "MultiAddress",
+            "typeName": "AccountIdLookupOf"
+          },
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "gasLimit",
+            "type": "Compact<u64>",
+            "typeName": "OldWeight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Option<Compact<u128>>",
+            "typeName": "Option<>"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "instantiateWithCodeOldWeight": {
+        "name": "instantiate_with_code_old_weight",
+        "fields": [
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "gas_limit",
+            "type": 24,
+            "typeName": "OldWeight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 153,
+            "typeName": "Option<<BalanceOf<T> as codec::HasCompact>::Type>",
+            "docs": []
+          },
+          {
+            "name": "code",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "salt",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 1,
+        "docs": [
+          "Deprecated version if [`Self::instantiate_with_code`] for use in an in-storage `Call`."
+        ],
+        "args": [
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "gasLimit",
+            "type": "Compact<u64>",
+            "typeName": "OldWeight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Option<Compact<u128>>",
+            "typeName": "Option<>"
+          },
+          {
+            "name": "code",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "salt",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "instantiateOldWeight": {
+        "name": "instantiate_old_weight",
+        "fields": [
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "gas_limit",
+            "type": 24,
+            "typeName": "OldWeight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 153,
+            "typeName": "Option<<BalanceOf<T> as codec::HasCompact>::Type>",
+            "docs": []
+          },
+          {
+            "name": "code_hash",
+            "type": 14,
+            "typeName": "CodeHash<T>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "salt",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 2,
+        "docs": [
+          "Deprecated version if [`Self::instantiate`] for use in an in-storage `Call`."
+        ],
+        "args": [
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "gasLimit",
+            "type": "Compact<u64>",
+            "typeName": "OldWeight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Option<Compact<u128>>",
+            "typeName": "Option<>"
+          },
+          {
+            "name": "codeHash",
+            "type": "H256",
+            "typeName": "CodeHash"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "salt",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "uploadCode": {
+        "name": "upload_code",
+        "fields": [
+          {
+            "name": "code",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 153,
+            "typeName": "Option<<BalanceOf<T> as codec::HasCompact>::Type>",
+            "docs": []
+          },
+          {
+            "name": "determinism",
+            "type": 154,
+            "typeName": "Determinism",
+            "docs": []
+          }
+        ],
+        "index": 3,
+        "docs": [
+          "Upload new `code` without instantiating a contract from it.",
+          "",
+          "If the code does not already exist a deposit is reserved from the caller",
+          "and unreserved only when [`Self::remove_code`] is called. The size of the reserve",
+          "depends on the size of the supplied `code`.",
+          "",
+          "If the code already exists in storage it will still return `Ok` and upgrades",
+          "the in storage version to the current",
+          "[`InstructionWeights::version`](InstructionWeights).",
+          "",
+          "- `determinism`: If this is set to any other value but [`Determinism::Enforced`] then",
+          "  the only way to use this code is to delegate call into it from an offchain execution.",
+          "  Set to [`Determinism::Enforced`] if in doubt.",
+          "",
+          "# Note",
+          "",
+          "Anyone can instantiate a contract from any uploaded code and thus prevent its removal.",
+          "To avoid this situation a constructor could employ access control so that it can",
+          "only be instantiated by permissioned entities. The same is true when uploading",
+          "through [`Self::instantiate_with_code`].",
+          "",
+          "Use [`Determinism::Relaxed`] exclusively for non-deterministic code. If the uploaded",
+          "code is deterministic, specifying [`Determinism::Relaxed`] will be disregarded and",
+          "result in higher gas costs."
+        ],
+        "args": [
+          {
+            "name": "code",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Option<Compact<u128>>",
+            "typeName": "Option<>"
+          },
+          {
+            "name": "determinism",
+            "type": "PalletContractsWasmDeterminism",
+            "typeName": "Determinism"
+          }
+        ]
+      },
+      "removeCode": {
+        "name": "remove_code",
+        "fields": [
+          {
+            "name": "code_hash",
+            "type": 14,
+            "typeName": "CodeHash<T>",
+            "docs": []
+          }
+        ],
+        "index": 4,
+        "docs": [
+          "Remove the code stored under `code_hash` and refund the deposit to its owner.",
+          "",
+          "A code can only be removed by its original uploader (its owner) and only if it is",
+          "not used by any contract."
+        ],
+        "args": [
+          {
+            "name": "codeHash",
+            "type": "H256",
+            "typeName": "CodeHash"
+          }
+        ]
+      },
+      "setCode": {
+        "name": "set_code",
+        "fields": [
+          {
+            "name": "dest",
+            "type": 0,
+            "typeName": "AccountIdLookupOf<T>",
+            "docs": []
+          },
+          {
+            "name": "code_hash",
+            "type": 14,
+            "typeName": "CodeHash<T>",
+            "docs": []
+          }
+        ],
+        "index": 5,
+        "docs": [
+          "Privileged function that changes the code of an existing contract.",
+          "",
+          "This takes care of updating refcounts and all other necessary operations. Returns",
+          "an error if either the `code_hash` or `dest` do not exist.",
+          "",
+          "# Note",
+          "",
+          "This does **not** change the address of the contract in question. This means",
+          "that the contract address is no longer derived from its code hash after calling",
+          "this dispatchable."
+        ],
+        "args": [
+          {
+            "name": "dest",
+            "type": "MultiAddress",
+            "typeName": "AccountIdLookupOf"
+          },
+          {
+            "name": "codeHash",
+            "type": "H256",
+            "typeName": "CodeHash"
+          }
+        ]
+      },
+      "call": {
+        "name": "call",
+        "fields": [
+          {
+            "name": "dest",
+            "type": 0,
+            "typeName": "AccountIdLookupOf<T>",
+            "docs": []
+          },
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "gas_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 153,
+            "typeName": "Option<<BalanceOf<T> as codec::HasCompact>::Type>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 6,
+        "docs": [
+          "Makes a call to an account, optionally transferring some balance.",
+          "",
+          "# Parameters",
+          "",
+          "* `dest`: Address of the contract to call.",
+          "* `value`: The balance to transfer from the `origin` to `dest`.",
+          "* `gas_limit`: The gas limit enforced when executing the constructor.",
+          "* `storage_deposit_limit`: The maximum amount of balance that can be charged from the",
+          "  caller to pay for the storage consumed.",
+          "* `data`: The input data to pass to the contract.",
+          "",
+          "* If the account is a smart-contract account, the associated code will be",
+          "executed and any value will be transferred.",
+          "* If the account is a regular account, any value will be transferred.",
+          "* If no account exists and the call value is not less than `existential_deposit`,",
+          "a regular account will be created and any value will be transferred."
+        ],
+        "args": [
+          {
+            "name": "dest",
+            "type": "MultiAddress",
+            "typeName": "AccountIdLookupOf"
+          },
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "gasLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Option<Compact<u128>>",
+            "typeName": "Option<>"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "instantiateWithCode": {
+        "name": "instantiate_with_code",
+        "fields": [
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "gas_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 153,
+            "typeName": "Option<<BalanceOf<T> as codec::HasCompact>::Type>",
+            "docs": []
+          },
+          {
+            "name": "code",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "salt",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 7,
+        "docs": [
+          "Instantiates a new contract from the supplied `code` optionally transferring",
+          "some balance.",
+          "",
+          "This dispatchable has the same effect as calling [`Self::upload_code`] +",
+          "[`Self::instantiate`]. Bundling them together provides efficiency gains. Please",
+          "also check the documentation of [`Self::upload_code`].",
+          "",
+          "# Parameters",
+          "",
+          "* `value`: The balance to transfer from the `origin` to the newly created contract.",
+          "* `gas_limit`: The gas limit enforced when executing the constructor.",
+          "* `storage_deposit_limit`: The maximum amount of balance that can be charged/reserved",
+          "  from the caller to pay for the storage consumed.",
+          "* `code`: The contract code to deploy in raw bytes.",
+          "* `data`: The input data to pass to the contract constructor.",
+          "* `salt`: Used for the address derivation. See [`Pallet::contract_address`].",
+          "",
+          "Instantiation is executed as follows:",
+          "",
+          "- The supplied `code` is deployed, and a `code_hash` is created for that code.",
+          "- If the `code_hash` already exists on the chain the underlying `code` will be shared.",
+          "- The destination address is computed based on the sender, code_hash and the salt.",
+          "- The smart-contract account is created at the computed address.",
+          "- The `value` is transferred to the new account.",
+          "- The `deploy` function is executed in the context of the newly-created account."
+        ],
+        "args": [
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "gasLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Option<Compact<u128>>",
+            "typeName": "Option<>"
+          },
+          {
+            "name": "code",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "salt",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "instantiate": {
+        "name": "instantiate",
+        "fields": [
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "gas_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 153,
+            "typeName": "Option<<BalanceOf<T> as codec::HasCompact>::Type>",
+            "docs": []
+          },
+          {
+            "name": "code_hash",
+            "type": 14,
+            "typeName": "CodeHash<T>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "salt",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 8,
+        "docs": [
+          "Instantiates a contract from a previously deployed wasm binary.",
+          "",
+          "This function is identical to [`Self::instantiate_with_code`] but without the",
+          "code deployment step. Instead, the `code_hash` of an on-chain deployed wasm binary",
+          "must be supplied."
+        ],
+        "args": [
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "gasLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Option<Compact<u128>>",
+            "typeName": "Option<>"
+          },
+          {
+            "name": "codeHash",
+            "type": "H256",
+            "typeName": "CodeHash"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "salt",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "migrate": {
+        "name": "migrate",
+        "fields": [
+          {
+            "name": "weight_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          }
+        ],
+        "index": 9,
+        "docs": [
+          "When a migration is in progress, this dispatchable can be used to run migration steps.",
+          "Calls that contribute to advancing the migration have their fees waived, as it's helpful",
+          "for the chain. Note that while the migration is in progress, the pallet will also",
+          "leverage the `on_idle` hooks to run migration steps."
+        ],
+        "args": [
+          {
+            "name": "weightLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          }
+        ]
+      }
+    },
+    "revive": {
+      "ethTransact": {
+        "name": "eth_transact",
+        "fields": [
+          {
+            "name": "payload",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 0,
+        "docs": [
+          "A raw EVM transaction, typically dispatched by an Ethereum JSON-RPC server.",
+          "",
+          "# Parameters",
+          "",
+          "* `payload`: The encoded [`crate::evm::TransactionSigned`].",
+          "",
+          "# Note",
+          "",
+          "This call cannot be dispatched directly; attempting to do so will result in a failed",
+          "transaction. It serves as a wrapper for an Ethereum transaction. When submitted, the",
+          "runtime converts it into a [`sp_runtime::generic::CheckedExtrinsic`] by recovering the",
+          "signer and validating the transaction."
+        ],
+        "args": [
+          {
+            "name": "payload",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "call": {
+        "name": "call",
+        "fields": [
+          {
+            "name": "dest",
+            "type": 344,
+            "typeName": "H160",
+            "docs": []
+          },
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "weight_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 1,
+        "docs": [
+          "Makes a call to an account, optionally transferring some balance.",
+          "",
+          "# Parameters",
+          "",
+          "* `dest`: Address of the contract to call.",
+          "* `value`: The balance to transfer from the `origin` to `dest`.",
+          "* `weight_limit`: The weight limit enforced when executing the constructor.",
+          "* `storage_deposit_limit`: The maximum amount of balance that can be charged from the",
+          "  caller to pay for the storage consumed.",
+          "* `data`: The input data to pass to the contract.",
+          "",
+          "* If the account is a smart-contract account, the associated code will be",
+          "executed and any value will be transferred.",
+          "* If the account is a regular account, any value will be transferred.",
+          "* If no account exists and the call value is not less than `existential_deposit`,",
+          "a regular account will be created and any value will be transferred."
+        ],
+        "args": [
+          {
+            "name": "dest",
+            "type": "H160",
+            "typeName": "H160"
+          },
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "weightLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "instantiate": {
+        "name": "instantiate",
+        "fields": [
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "weight_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "code_hash",
+            "type": 14,
+            "typeName": "sp_core::H256",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "salt",
+            "type": 345,
+            "typeName": "Option<[u8; 32]>",
+            "docs": []
+          }
+        ],
+        "index": 2,
+        "docs": [
+          "Instantiates a contract from a previously deployed vm binary.",
+          "",
+          "This function is identical to [`Self::instantiate_with_code`] but without the",
+          "code deployment step. Instead, the `code_hash` of an on-chain deployed vm binary",
+          "must be supplied."
+        ],
+        "args": [
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "weightLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "codeHash",
+            "type": "H256",
+            "typeName": "H256"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "salt",
+            "type": "Option<[u8;32]>",
+            "typeName": "Option<[u8;32]>"
+          }
+        ]
+      },
+      "instantiateWithCode": {
+        "name": "instantiate_with_code",
+        "fields": [
+          {
+            "name": "value",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "weight_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          },
+          {
+            "name": "code",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "salt",
+            "type": 345,
+            "typeName": "Option<[u8; 32]>",
+            "docs": []
+          }
+        ],
+        "index": 3,
+        "docs": [
+          "Instantiates a new contract from the supplied `code` optionally transferring",
+          "some balance.",
+          "",
+          "This dispatchable has the same effect as calling [`Self::upload_code`] +",
+          "[`Self::instantiate`]. Bundling them together provides efficiency gains. Please",
+          "also check the documentation of [`Self::upload_code`].",
+          "",
+          "# Parameters",
+          "",
+          "* `value`: The balance to transfer from the `origin` to the newly created contract.",
+          "* `weight_limit`: The weight limit enforced when executing the constructor.",
+          "* `storage_deposit_limit`: The maximum amount of balance that can be charged/reserved",
+          "  from the caller to pay for the storage consumed.",
+          "* `code`: The contract code to deploy in raw bytes.",
+          "* `data`: The input data to pass to the contract constructor.",
+          "* `salt`: Used for the address derivation. If `Some` is supplied then `CREATE2`",
+          "\tsemantics are used. If `None` then `CRATE1` is used.",
+          "",
+          "",
+          "Instantiation is executed as follows:",
+          "",
+          "- The supplied `code` is deployed, and a `code_hash` is created for that code.",
+          "- If the `code_hash` already exists on the chain the underlying `code` will be shared.",
+          "- The destination address is computed based on the sender, code_hash and the salt.",
+          "- The smart-contract account is created at the computed address.",
+          "- The `value` is transferred to the new account.",
+          "- The `deploy` function is executed in the context of the newly-created account."
+        ],
+        "args": [
+          {
+            "name": "value",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "weightLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          },
+          {
+            "name": "code",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "salt",
+            "type": "Option<[u8;32]>",
+            "typeName": "Option<[u8;32]>"
+          }
+        ]
+      },
+      "ethInstantiateWithCode": {
+        "name": "eth_instantiate_with_code",
+        "fields": [
+          {
+            "name": "value",
+            "type": 346,
+            "typeName": "U256",
+            "docs": []
+          },
+          {
+            "name": "weight_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "eth_gas_limit",
+            "type": 346,
+            "typeName": "U256",
+            "docs": []
+          },
+          {
+            "name": "code",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "transaction_encoded",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "effective_gas_price",
+            "type": 346,
+            "typeName": "U256",
+            "docs": []
+          },
+          {
+            "name": "encoded_len",
+            "type": 4,
+            "typeName": "u32",
+            "docs": []
+          }
+        ],
+        "index": 10,
+        "docs": [
+          "Same as [`Self::instantiate_with_code`], but intended to be dispatched **only**",
+          "by an EVM transaction through the EVM compatibility layer.",
+          "",
+          "# Parameters",
+          "",
+          "* `value`: The balance to transfer from the `origin` to the newly created contract.",
+          "* `weight_limit`: The gas limit used to derive the transaction weight for transaction",
+          "  payment",
+          "* `eth_gas_limit`: The Ethereum gas limit governing the resource usage of the execution",
+          "* `code`: The contract code to deploy in raw bytes.",
+          "* `data`: The input data to pass to the contract constructor.",
+          "* `transaction_encoded`: The RLP encoding of the signed Ethereum transaction,",
+          "  represented as [crate::evm::TransactionSigned], provided by the Ethereum wallet. This",
+          "  is used for building the Ethereum transaction root.",
+          "* effective_gas_price: the price of a unit of gas",
+          "* encoded len: the byte code size of the `eth_transact` extrinsic",
+          "",
+          "Calling this dispatchable ensures that the origin's nonce is bumped only once,",
+          "via the `CheckNonce` transaction extension. In contrast, [`Self::instantiate_with_code`]",
+          "also bumps the nonce after contract instantiation, since it may be invoked multiple",
+          "times within a batch call transaction."
+        ],
+        "args": [
+          {
+            "name": "value",
+            "type": "U256",
+            "typeName": "U256"
+          },
+          {
+            "name": "weightLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "ethGasLimit",
+            "type": "U256",
+            "typeName": "U256"
+          },
+          {
+            "name": "code",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "transactionEncoded",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "effectiveGasPrice",
+            "type": "U256",
+            "typeName": "U256"
+          },
+          {
+            "name": "encodedLen",
+            "type": "u32",
+            "typeName": "u32"
+          }
+        ]
+      },
+      "ethCall": {
+        "name": "eth_call",
+        "fields": [
+          {
+            "name": "dest",
+            "type": 344,
+            "typeName": "H160",
+            "docs": []
+          },
+          {
+            "name": "value",
+            "type": 346,
+            "typeName": "U256",
+            "docs": []
+          },
+          {
+            "name": "weight_limit",
+            "type": 23,
+            "typeName": "Weight",
+            "docs": []
+          },
+          {
+            "name": "eth_gas_limit",
+            "type": 346,
+            "typeName": "U256",
+            "docs": []
+          },
+          {
+            "name": "data",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "transaction_encoded",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "effective_gas_price",
+            "type": 346,
+            "typeName": "U256",
+            "docs": []
+          },
+          {
+            "name": "encoded_len",
+            "type": 4,
+            "typeName": "u32",
+            "docs": []
+          }
+        ],
+        "index": 11,
+        "docs": [
+          "Same as [`Self::call`], but intended to be dispatched **only**",
+          "by an EVM transaction through the EVM compatibility layer.",
+          "",
+          "# Parameters",
+          "",
+          "* `dest`: The Ethereum address of the account to be called",
+          "* `value`: The balance to transfer from the `origin` to the newly created contract.",
+          "* `weight_limit`: The gas limit used to derive the transaction weight for transaction",
+          "  payment",
+          "* `eth_gas_limit`: The Ethereum gas limit governing the resource usage of the execution",
+          "* `data`: The input data to pass to the contract constructor.",
+          "* `transaction_encoded`: The RLP encoding of the signed Ethereum transaction,",
+          "  represented as [crate::evm::TransactionSigned], provided by the Ethereum wallet. This",
+          "  is used for building the Ethereum transaction root.",
+          "* effective_gas_price: the price of a unit of gas",
+          "* encoded len: the byte code size of the `eth_transact` extrinsic"
+        ],
+        "args": [
+          {
+            "name": "dest",
+            "type": "H160",
+            "typeName": "H160"
+          },
+          {
+            "name": "value",
+            "type": "U256",
+            "typeName": "U256"
+          },
+          {
+            "name": "weightLimit",
+            "type": "SpWeightsWeightV2Weight",
+            "typeName": "Weight"
+          },
+          {
+            "name": "ethGasLimit",
+            "type": "U256",
+            "typeName": "U256"
+          },
+          {
+            "name": "data",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "transactionEncoded",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "effectiveGasPrice",
+            "type": "U256",
+            "typeName": "U256"
+          },
+          {
+            "name": "encodedLen",
+            "type": "u32",
+            "typeName": "u32"
+          }
+        ]
+      },
+      "ethSubstrateCall": {
+        "name": "eth_substrate_call",
+        "fields": [
+          {
+            "name": "call",
+            "type": 8,
+            "typeName": "Box<<T as Config>::RuntimeCall>",
+            "docs": []
+          },
+          {
+            "name": "transaction_encoded",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          }
+        ],
+        "index": 12,
+        "docs": [
+          "Executes a Substrate runtime call from an Ethereum transaction.",
+          "",
+          "This dispatchable is intended to be called **only** through the EVM compatibility",
+          "layer. The provided call will be dispatched using `RawOrigin::Signed`.",
+          "",
+          "# Parameters",
+          "",
+          "* `origin`: Must be an [`Origin::EthTransaction`] origin.",
+          "* `call`: The Substrate runtime call to execute.",
+          "* `transaction_encoded`: The RLP encoding of the Ethereum transaction,"
+        ],
+        "args": [
+          {
+            "name": "call",
+            "type": "Call",
+            "typeName": "RuntimeCall"
+          },
+          {
+            "name": "transactionEncoded",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          }
+        ]
+      },
+      "uploadCode": {
+        "name": "upload_code",
+        "fields": [
+          {
+            "name": "code",
+            "type": 6,
+            "typeName": "Vec<u8>",
+            "docs": []
+          },
+          {
+            "name": "storage_deposit_limit",
+            "type": 42,
+            "typeName": "BalanceOf<T>",
+            "docs": []
+          }
+        ],
+        "index": 4,
+        "docs": [
+          "Upload new `code` without instantiating a contract from it.",
+          "",
+          "If the code does not already exist a deposit is reserved from the caller",
+          "The size of the reserve depends on the size of the supplied `code`.",
+          "",
+          "# Note",
+          "",
+          "Anyone can instantiate a contract from any uploaded code and thus prevent its removal.",
+          "To avoid this situation a constructor could employ access control so that it can",
+          "only be instantiated by permissioned entities. The same is true when uploading",
+          "through [`Self::instantiate_with_code`].",
+          "",
+          "If the refcount of the code reaches zero after terminating the last contract that",
+          "references this code, the code will be removed automatically."
+        ],
+        "args": [
+          {
+            "name": "code",
+            "type": "Bytes",
+            "typeName": "Bytes"
+          },
+          {
+            "name": "storageDepositLimit",
+            "type": "Compact<u128>",
+            "typeName": "BalanceOf"
+          }
+        ]
+      },
+      "removeCode": {
+        "name": "remove_code",
+        "fields": [
+          {
+            "name": "code_hash",
+            "type": 14,
+            "typeName": "sp_core::H256",
+            "docs": []
+          }
+        ],
+        "index": 5,
+        "docs": [
+          "Remove the code stored under `code_hash` and refund the deposit to its owner.",
+          "",
+          "A code can only be removed by its original uploader (its owner) and only if it is",
+          "not used by any contract."
+        ],
+        "args": [
+          {
+            "name": "codeHash",
+            "type": "H256",
+            "typeName": "H256"
+          }
+        ]
+      },
+      "setCode": {
+        "name": "set_code",
+        "fields": [
+          {
+            "name": "dest",
+            "type": 344,
+            "typeName": "H160",
+            "docs": []
+          },
+          {
+            "name": "code_hash",
+            "type": 14,
+            "typeName": "sp_core::H256",
+            "docs": []
+          }
+        ],
+        "index": 6,
+        "docs": [
+          "Privileged function that changes the code of an existing contract.",
+          "",
+          "This takes care of updating refcounts and all other necessary operations. Returns",
+          "an error if either the `code_hash` or `dest` do not exist.",
+          "",
+          "# Note",
+          "",
+          "This does **not** change the address of the contract in question. This means",
+          "that the contract address is no longer derived from its code hash after calling",
+          "this dispatchable."
+        ],
+        "args": [
+          {
+            "name": "dest",
+            "type": "H160",
+            "typeName": "H160"
+          },
+          {
+            "name": "codeHash",
+            "type": "H256",
+            "typeName": "H256"
+          }
+        ]
+      },
+      "mapAccount": {
+        "name": "map_account",
+        "fields": [],
+        "index": 7,
+        "docs": [
+          "Register the callers account id so that it can be used in contract interactions.",
+          "",
+          "This will error if the origin is already mapped or is a eth native `Address20`. It will",
+          "take a deposit that can be released by calling [`Self::unmap_account`].",
+          "",
+          "Noop when [`Config::AutoMap`] is enabled, as accounts are automatically mapped",
+          "on creation via [`AutoMapper`]."
+        ],
+        "args": []
+      },
+      "batchMapAccounts": {
+        "name": "batch_map_accounts",
+        "fields": [
+          {
+            "name": "accounts",
+            "type": 44,
+            "typeName": "Vec<T::AccountId>",
+            "docs": []
+          }
+        ],
+        "index": 13,
+        "docs": [
+          "Map many accounts and make the TX free if at least 90% were unmapped or held deposits."
+        ],
+        "args": [
+          {
+            "name": "accounts",
+            "type": "Vec<AccountId32>",
+            "typeName": "Vec<AccountId>"
+          }
+        ]
+      },
+      "unmapAccount": {
+        "name": "unmap_account",
+        "fields": [],
+        "index": 8,
+        "docs": [
+          "Unregister the callers account id in order to free the deposit.",
+          "",
+          "There is no reason to ever call this function other than freeing up the deposit.",
+          "This is only useful when the account should no longer be used.",
+          "",
+          "Disabled when [`Config::AutoMap`] is enabled, as accounts are automatically unmapped",
+          "on kill via [`AutoMapper`]."
+        ],
+        "args": []
+      },
+      "dispatchAsFallbackAccount": {
+        "name": "dispatch_as_fallback_account",
+        "fields": [
+          {
+            "name": "call",
+            "type": 8,
+            "typeName": "Box<<T as Config>::RuntimeCall>",
+            "docs": []
+          }
+        ],
+        "index": 9,
+        "docs": [
+          "Dispatch an `call` with the origin set to the callers fallback address.",
+          "",
+          "Every `AccountId32` can control its corresponding fallback account. The fallback account",
+          "is the `AccountId20` with the last 12 bytes set to `0xEE`. This is essentially a",
+          "recovery function in case an `AccountId20` was used without creating a mapping first."
+        ],
+        "args": [
+          {
+            "name": "call",
+            "type": "Call",
+            "typeName": "RuntimeCall"
+          }
+        ]
+      }
+    }
+  },
+  "signingAttempted": false,
+  "note": "Read-only native account and runtime metadata. Native balance does not establish EVM spending authority."
+}

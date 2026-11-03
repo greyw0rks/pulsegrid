@@ -1,0 +1,33 @@
+name: Monitor configured Portaldot endpoints
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pulsegrid-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm worker:once
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PULSEGRID_PRIVATE_KEY: ${{ secrets.PULSEGRID_PRIVATE_KEY }}
+          PULSEGRID_NETWORK: testnet
+          PULSEGRID_REGISTRY_ADDRESS: "0x9c0d5b9cca49f69ffc7384d5da263689a21f7e22"
+          PULSEGRID_DEPLOYMENT_BLOCK: "303901"
+          PULSEGRID_NATIVE_GENESIS: "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd"
+          PULSEGRID_HEARTBEAT_MAX_AGE_MS: "900000"

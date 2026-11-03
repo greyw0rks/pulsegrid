@@ -1,0 +1,18 @@
+{
+  "schema": "pulsegrid.deployment.v1",
+  "network": "testnet",
+  "networkName": "Portaldot V3 testnet",
+  "chainId": 420420777,
+  "contract": "0x9c0d5b9cca49f69ffc7384d5da263689a21f7e22",
+  "reporter": "0xC156551F786270C8bb3c748c9Bee68FaC1bdC9DB",
+  "transactionHash": "0x57cffb9de823940f9b0945c1297dce73e38ec8dd1f7453b8b0c6b962fa537479",
+  "blockNumber": "303901",
+  "blockHash": "0xfc0bac7bb0e17f29f495e3afb75661bf7dd89d62cdebfb8994549e0b4c946ed6",
+  "status": "success",
+  "gasUsed": "8198239033472064",
+  "effectiveGasPriceWei": "23390",
+  "paidFeeTPOT": "191.75681099291157696",
+  "deploymentCodeHash": "0x518e1f066932ed07344f734b031809896c82cab7308eb98bdf2041f05c194c43",
+  "runtimeCodeHash": "0x1906c8ba11782e82b2e8006afc8a115bf7ad019e5fbac1f3477dc71a6d7c7413",
+  "deployedAt": "2026-11-03T08:55:19.123Z"
+}

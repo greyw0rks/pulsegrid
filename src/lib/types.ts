@@ -1,0 +1,90 @@
+import type { Hex } from "viem";
+
+export type EndpointKind = "evm" | "native";
+export type FailureCode = "RPC_TIMEOUT" | "RPC_HTTP_ERROR" | "RPC_MALFORMED" | "RPC_ERROR" | "CHAIN_MISMATCH" | "GENESIS_MISMATCH" | "WS_CONNECTION" | "DRILL_TIMEOUT";
+export type ProbeResult = {
+  checkedAt: string;
+  success: boolean;
+  latencyMs: number;
+  chainId: number | null;
+  blockHeight: string | null;
+  genesisHash: Hex | null;
+  errorCode: FailureCode | null;
+  warnings: string[];
+  methods: string[];
+  simulated: boolean;
+};
+export type ProbeEndpoint = {
+  id: Hex;
+  url: string;
+  kind: EndpointKind;
+  expectedChainId: number | null;
+  expectedGenesisHash: Hex | null;
+  timeoutMs: number;
+  simulated: boolean;
+  faultMode: "normal" | "timeout";
+};
+export type StoredCheck = ProbeResult & { id: string; endpointId: Hex; monitorId: string };
+export type DetectionState = {
+  failures: number;
+  successes: number;
+  activeIncidentId: string | null;
+  lastCheckedAt: string | null;
+};
+export type DetectionPolicy = { failureThreshold: number; recoveryThreshold: number; intervalMs: number };
+export type DetectionAction = "open" | "resolve" | null;
+export type TimelineEntry = {
+  id: string; type: string; occurredAt: string; detail: string; transactionHash: Hex | null;
+};
+export type IncidentView = {
+  id: string;
+  endpointId: Hex;
+  endpointName: string;
+  reportKey: Hex;
+  severity: number;
+  failureCode: string;
+  failureCount: number;
+  observedAt: string;
+  detectedAt: string;
+  recoveredAt: string | null;
+  ledgerStatus: string;
+  evidenceHash: Hex;
+  resolutionHash: Hex | null;
+  chainIncidentId: string | null;
+  openTxHash: Hex | null;
+  resolveTxHash: Hex | null;
+  reporter: string | null;
+  simulated: boolean;
+  lastError: string | null;
+};
+export type EndpointView = {
+  id: Hex;
+  name: string;
+  url: string;
+  kind: EndpointKind;
+  enabled: boolean;
+  intervalMs: number;
+  failureThreshold: number;
+  recoveryThreshold: number;
+  simulated: boolean;
+  faultMode: "normal" | "timeout";
+  latest: StoredCheck | null;
+  status: "healthy" | "degraded" | "down" | "stale" | "unobserved" | "paused";
+  uptime: number | null;
+  p50: number | null;
+  p95: number | null;
+  sampleCount: number;
+  failureCount: number;
+  history: { at: string; latencyMs: number | null; success: boolean; blockHeight: string | null }[];
+};
+export type Overview = {
+  generatedAt: string;
+  databaseAvailable: boolean;
+  error: string | null;
+  network: { name: string; mode: string; chainId: number; registry: string | null; signerConfigured: boolean; nodeConsole: string };
+  monitor: { id: string | null; heartbeatAt: string | null; startedAt: string | null; stale: boolean; state: string; lastError: string | null };
+  endpoints: EndpointView[];
+  incidents: IncidentView[];
+  ledger: { confirmed: number; pending: number; failed: number; latest: TimelineEntry | null };
+  drillsEnabled: boolean;
+};

@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-03T09:49:28.113Z",
+  "provider": "Neon",
+  "plan": "Free",
+  "project": "pulsegrid",
+  "counts": {
+    "endpoints": 3,
+    "evidence": 2,
+    "incidents": 1,
+    "health_checks": 201,
+    "timeline": 9,
+    "outbox": 2,
+    "monitors": 1,
+    "registry_events": 2,
+    "indexer_state": 1
+  },
+  "note": "Genuine retained local monitoring and testnet evidence copied to an isolated hosted database. Scheduled observations use a five-minute interval."
+}

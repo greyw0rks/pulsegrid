@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-11-03T09:10:55.395Z",
+  "status": "passed",
+  "base": "http://127.0.0.1:3023",
+  "chainId": 420420777,
+  "deploymentVerified": true,
+  "widths": [
+    1440,
+    390,
+    320
+  ],
+  "reducedMotionVerified": true,
+  "darkThemeVerified": true,
+  "browserErrors": [],
+  "note": "Read-only verification of the running public testnet dashboard; no operator changes or signed transactions."
+}

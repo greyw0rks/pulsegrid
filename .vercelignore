@@ -1,0 +1,10 @@
+.local/
+.atlas/
+.env*
+node_modules/
+.next/
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+test-results/
+playwright-report/

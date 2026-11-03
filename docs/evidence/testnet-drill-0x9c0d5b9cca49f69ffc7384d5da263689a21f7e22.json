@@ -1,0 +1,32 @@
+{
+  "schema": "pulsegrid.testnet-drill.v1",
+  "checkedAt": "2026-11-03T09:03:16.524Z",
+  "chainId": 420420777,
+  "network": "Portaldot V3 testnet",
+  "registry": "0x9c0d5b9cca49f69ffc7384d5da263689a21f7e22",
+  "simulated": true,
+  "endpointId": "0x4fbdaa7487121dd6ff0ed13e5977cfdd58f2d0a33bc0eb3ce682720ec36e8a19",
+  "incidentId": "0afba727-2892-408f-8160-69eef6f58e25",
+  "chainIncidentId": "1",
+  "openingEvidence": "0xc8f048ceca2785f5a02af4e596d53f7e43b6fd67ed5ba39eb5b02ee43c1a99f4",
+  "recoveryEvidence": "0x6564616c02dd9c6d29c9dbe1dbdf98acc178463c82935facf41d199fe25de58a",
+  "openingTransaction": "0x9e23d94eec00311d184275f50330a7a203c591cd3159d915773f7ba7fc0663ec",
+  "recoveryTransaction": "0x1f2e422c28e5b433bdb28d841810c4a386fd3ba58faf3ce02830e1f29e1d0c35",
+  "events": [
+    {
+      "transaction_hash": "0x9e23d94eec00311d184275f50330a7a203c591cd3159d915773f7ba7fc0663ec",
+      "event_name": "IncidentOpened",
+      "evidence_hash": "0xc8f048ceca2785f5a02af4e596d53f7e43b6fd67ed5ba39eb5b02ee43c1a99f4",
+      "block_number": "303974"
+    },
+    {
+      "transaction_hash": "0x1f2e422c28e5b433bdb28d841810c4a386fd3ba58faf3ce02830e1f29e1d0c35",
+      "event_name": "IncidentResolved",
+      "evidence_hash": "0x6564616c02dd9c6d29c9dbe1dbdf98acc178463c82935facf41d199fe25de58a",
+      "block_number": "303980"
+    }
+  ],
+  "evidenceDirectory": "docs/evidence/testnet-drill",
+  "reporterBalanceTPOT": "77.367262848516051185",
+  "note": "Controlled timeout and recovery on a dedicated simulated endpoint, with genuine public testnet transactions and receipts. This is an execution drill, not evidence of an official RPC outage."
+}

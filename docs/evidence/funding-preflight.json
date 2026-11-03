@@ -1,0 +1,41 @@
+{
+  "schema": "pulsegrid.funding-preflight.v1",
+  "checkedAt": "2026-11-03T08:39:47.877Z",
+  "chainId": 420420777,
+  "genesis": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+  "source": "5DkyaZCdhQH848vkZBxp6bPEVcn78bpKf3rhtwRn5tb8VrJv",
+  "sourceFreeAtomic": "50000000000000000",
+  "sourceFreeTPOT": "500",
+  "sourceMappedEvm": "0xb097f0995cb27c85a71f9f45d7812eed23204453",
+  "sourceMapping": "5DkyaZCdhQH848vkZBxp6bPEVcn78bpKf3rhtwRn5tb8VrJv",
+  "sourceEvmBalanceWei": "499900000000000000000",
+  "reporter": "0xC156551F786270C8bb3c748c9Bee68FaC1bdC9DB",
+  "destinationNative": "5GSCkAWEAgEQdsxyPYeJ3RE5sjcXCus4VxCG6JnZSiFKhbSK",
+  "destinationAccountId": "0xc156551f786270c8bb3c748c9bee68fac1bdc9dbeeeeeeeeeeeeeeeeeeeeeeee",
+  "recipientMapping": null,
+  "recipient": {
+    "nonce": 0,
+    "consumers": 0,
+    "providers": 0,
+    "sufficients": 0,
+    "data": {
+      "free": 0,
+      "reserved": 0,
+      "frozen": 0,
+      "flags": "0x80000000000000000000000000000000"
+    }
+  },
+  "proposedTransferAtomic": "100000000000000",
+  "proposedTransferTPOT": "1",
+  "estimatedNativeTransferFeeAtomic": "1490415363861",
+  "existentialDepositAtomic": "10000000000000",
+  "deploymentGas": "8324591736861222",
+  "gasPriceWei": "23395",
+  "estimatedDeploymentFeeTPOT": "194.75382368386828869",
+  "estimateError": null,
+  "deploymentCodeHash": "0x518e1f066932ed07344f734b031809896c82cab7308eb98bdf2041f05c194c43",
+  "unsignedTransfer": "0x060300c156551f786270c8bb3c748c9bee68fac1bdc9dbeeeeeeeeeeeeeeeeeeeeeeee0b00407a10f35a",
+  "signed": false,
+  "submitted": false,
+  "note": "Read-only preflight. Destination follows Revive's AccountId32 fallback mapping (H160 plus twelve 0xEE bytes). No funding transfer or deployment has been submitted."
+}
