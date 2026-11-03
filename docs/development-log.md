@@ -2,6 +2,10 @@
 
 ## November 3, 2026
 
+- Published the repository to GitHub and connected it to the Vercel project. The public landing page and dashboard are hosted at https://pulsegrid-psi.vercel.app; the unsuffixed alias was unavailable.
+- Migrated genuine monitoring history and the successful controlled testnet drill into an isolated Neon Free database. Vercel uses pooled connections; the scheduled Actions worker uses a direct connection for its session advisory lock. Reporter credentials stay out of the web deployment.
+- Added production packaging for retained deployment proofs, explicit UTC timestamps to fix server/browser timezone hydration, and an operator interval minimum matching five-minute hosted scheduling. Application tests now pass 23 checks; ESLint reports no errors.
+
 - Resumed the existing Pulsegrid implementation and restored the production preview and persistent worker on localhost:3023 with a private local PostgreSQL instance.
 - Verified Atlas's local dashboard on localhost:3005 and its MCP session interface.
 - Verified the user-supplied native account held 500 tPOT on Portaldot V3; unlocked the supplied encrypted sr25519 wallet using a local password file without printing the password or key.

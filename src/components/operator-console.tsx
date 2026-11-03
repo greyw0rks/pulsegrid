@@ -6,7 +6,7 @@ import { StatusBadge } from "./status-badge";
 import { formatDate } from "@/lib/format";
 import type { Overview } from "@/lib/types";
 
-export function OperatorConsole({ initial, tokenConfigured, allowedHosts }: { initial: Overview; tokenConfigured: boolean; allowedHosts: string[] }) {
+export function OperatorConsole({ initial, tokenConfigured, allowedHosts, scheduledMonitoring = false }: { initial: Overview; tokenConfigured: boolean; allowedHosts: string[]; scheduledMonitoring?: boolean }) {
   const [overview, setOverview] = useState(initial);
   const [token, setToken] = useState("");
   const [unlocked, setUnlocked] = useState(false);
@@ -74,7 +74,7 @@ export function OperatorConsole({ initial, tokenConfigured, allowedHosts }: { in
           <label>Endpoint name<input name="name" required minLength={2} maxLength={60} placeholder="Primary EVM RPC" /></label>
           <label>Protocol<select name="kind" defaultValue="evm"><option value="evm">EVM · HTTPS</option><option value="native">Native · WebSocket</option></select></label>
           <label>RPC URL<input name="url" type="url" required placeholder="https://…" /></label>
-          <div className="operator-fields"><label>Interval (seconds)<input name="interval" type="number" min={5} max={3600} defaultValue={30} required /></label>
+          <div className="operator-fields"><label>Interval (seconds)<input name="interval" type="number" min={scheduledMonitoring ? 300 : 5} max={3600} defaultValue={scheduledMonitoring ? 300 : 30} required /></label>
             <label>Failures to open<input name="failure" type="number" min={1} max={10} defaultValue={3} required /></label>
             <label>Successes to recover<input name="recovery" type="number" min={1} max={10} defaultValue={3} required /></label></div>
           <button className="button button-primary" type="submit"><Plus size={15} aria-hidden="true" />{busy === "add" ? "Registering…" : "Register endpoint"}</button>

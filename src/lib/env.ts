@@ -28,6 +28,7 @@ export function runtimeConfig() {
     operatorToken: process.env.PULSEGRID_OPERATOR_TOKEN || "",
     heartbeatMaxAgeMs: Math.max(20000, Math.min(3600000, Number(process.env.PULSEGRID_HEARTBEAT_MAX_AGE_MS) || 20000)),
     siteUrl: process.env.PULSEGRID_SITE_URL || "http://localhost:3000",
+    scheduledMonitoring: process.env.PULSEGRID_SCHEDULED_MONITORING === "true",
     allowedHosts: (process.env.PULSEGRID_ALLOWED_HOSTS || "test-evm-rpc-v3.portaldot.dev,test-node-v3.portaldot.dev")
       .split(",").map(x => x.trim().toLowerCase()).filter(Boolean)
   };

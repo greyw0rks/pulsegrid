@@ -10,6 +10,7 @@ export default async function OperatorPage() {
   const config = runtimeConfig();
   return <div className="page shell"><header className="page-head"><div><h1>Keep the pulse running.</h1>
     <p className="lede">Register an RPC endpoint, tune detection thresholds, and pause or resume observations.</p></div></header>
-    <OperatorConsole initial={await getOverview()} tokenConfigured={!!config.operatorToken} allowedHosts={config.allowedHosts} />
+    {config.scheduledMonitoring && <p className="notice">Hosted checks run every five minutes. Scheduled runs can be delayed; review the last observed time before assessing endpoint health.</p>}
+    <OperatorConsole initial={await getOverview()} tokenConfigured={!!config.operatorToken} allowedHosts={config.allowedHosts} scheduledMonitoring={config.scheduledMonitoring} />
   </div>;
 }

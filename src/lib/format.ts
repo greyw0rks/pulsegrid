@@ -1,6 +1,6 @@
 export function formatDate(value: string | null) {
   if (!value) return "Not observed";
-  return new Intl.DateTimeFormat("en", { dateStyle: "medium", timeStyle: "medium" }).format(new Date(value));
+  return new Intl.DateTimeFormat("en", { dateStyle: "medium", timeStyle: "medium", timeZone: "UTC" }).format(new Date(value)) + " UTC";
 }
 
 export function formatPercent(value: number | null) {

@@ -2,6 +2,10 @@
 
 An independent Portaldot RPC monitor with retained observations, verifiable incident evidence, and a Solidity registry for opening and recovery attestations.
 
+**Live:** https://pulsegrid-psi.vercel.app · **Source:** https://github.com/greyw0rks/pulsegrid
+
+The hosted MVP uses Neon PostgreSQL and a GitHub Actions monitor scheduled every five minutes. See [hosting](docs/HOSTING.md) for cadence, credentials, and operational limits.
+
 The local dashboard runs at **http://localhost:3023**. Atlas is available at **http://localhost:3005**.
 
 ## Run locally

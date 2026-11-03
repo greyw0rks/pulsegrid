@@ -6,14 +6,14 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "rec
 type Point = { at: string; latencyMs: number | null; success: boolean; blockHeight: string | null };
 
 function timeLabel(value: string) {
-  return new Intl.DateTimeFormat(undefined, { hour: "2-digit", minute: "2-digit" }).format(new Date(value));
+  return new Intl.DateTimeFormat("en", { hour: "2-digit", minute: "2-digit", timeZone: "UTC" }).format(new Date(value));
 }
 
 export function TelemetryChart({ data }: { data: Point[] }) {
   const gradientId = useId().replaceAll(":", "");
   if (!data.length) return <div className="empty">Awaiting the first observation.</div>;
   return (
-    <div className="chart-wrap" role="img" aria-label={`Recent endpoint latency across ${data.length} retained observations`}>
+    <div className="chart-wrap" role="img" aria-label={`Recent endpoint latency across ${data.length} retained observations; times in UTC`}>
       <ResponsiveContainer width="100%" height={150}>
         <AreaChart data={data} margin={{ top: 7, right: 8, bottom: 0, left: 0 }}>
           <defs>

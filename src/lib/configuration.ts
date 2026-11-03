@@ -45,6 +45,7 @@ export async function addEndpoint(input: unknown) {
   const url = assertAllowedEndpoint(data.url, data.kind);
   const config = runtimeConfig();
   const id = endpointIdFor(randomUUID());
+  if (config.scheduledMonitoring && data.intervalSeconds < 300) throw new Error("Hosted checks run every five minutes. Choose an interval of at least 300 seconds.");
   await pool.query(`INSERT INTO endpoints(id,name,url,kind,expected_chain_id,expected_genesis_hash,interval_ms,failure_threshold,recovery_threshold)
     VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`, [id, data.name, url.toString(), data.kind, data.kind === "evm" ? config.chainId : null,
     data.kind === "native" ? config.nativeGenesis || null : null, data.intervalSeconds * 1000, data.failureThreshold, data.recoveryThreshold]);

@@ -1,7 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("../src/lib/db", () => ({ pool: { query: vi.fn() } }));
-import { assertAllowedEndpoint, authorizeOperator } from "../src/lib/configuration";
+import { addEndpoint, assertAllowedEndpoint, authorizeOperator } from "../src/lib/configuration";
+import { pool } from "../src/lib/db";
 
 afterEach(() => vi.unstubAllEnvs());
 
@@ -30,6 +31,16 @@ describe("operator authorization", () => {
 });
 
 describe("endpoint allowlist", () => {
+  it("rejects intervals faster than hosted scheduling before persisting an endpoint", async () => {
+    vi.stubEnv("PULSEGRID_NETWORK", "testnet");
+    vi.stubEnv("PULSEGRID_ALLOWED_HOSTS", "rpc.example.test");
+    vi.stubEnv("PULSEGRID_SCHEDULED_MONITORING", "true");
+    vi.mocked(pool.query).mockClear();
+    await expect(addEndpoint({ name: "Official RPC", url: "https://rpc.example.test", kind: "evm", intervalSeconds: 30 })).rejects.toThrow("at least 300 seconds");
+    expect(pool.query).not.toHaveBeenCalled();
+    await expect(addEndpoint({ name: "Official RPC", url: "https://rpc.example.test", kind: "evm", intervalSeconds: 300 })).resolves.toMatch(/^0x[0-9a-f]{64}$/);
+    expect(pool.query).toHaveBeenCalledTimes(1);
+  });
   it("rejects credentials, query strings, foreign hosts and unexpected ports", () => {
     vi.stubEnv("PULSEGRID_NETWORK", "testnet");
     vi.stubEnv("PULSEGRID_ALLOWED_HOSTS", "rpc.example.test");
