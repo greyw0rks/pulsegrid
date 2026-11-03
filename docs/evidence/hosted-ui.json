@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-11-03T10:36:09.882Z",
+  "status": "passed",
+  "base": "https://pulsegrid-psi.vercel.app",
+  "apiChecks": [
+    {
+      "path": "/api/health",
+      "status": 200
+    },
+    {
+      "path": "/api/deployment",
+      "status": 200
+    },
+    {
+      "path": "/api/overview",
+      "status": 200
+    }
+  ],
+  "publicRoutes": [
+    "/",
+    "/dashboard",
+    "/registry",
+    "/operator"
+  ],
+  "widths": [
+    1440,
+    390,
+    360
+  ],
+  "reducedMotion": true,
+  "browserErrors": [],
+  "note": "Read-only checks against the public production deployment. No operator changes or signed transactions."
+}
