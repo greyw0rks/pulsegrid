@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-11-07T15:59:25.280Z",
+  "website": "https://pulsegrid-psi.vercel.app/bot",
+  "contract": "0x368d564dd8166d1967f21c7fbaaf87883ef85c83",
+  "chainId": 677,
+  "proofVerified": true,
+  "monitor": {
+    "state": "observing:ready",
+    "checked": 0,
+    "at": "2026-11-07T15:58:54.228Z"
+  },
+  "botChecks": [
+    {
+      "name": "BOT Chain RPC",
+      "samples": 1,
+      "status": "healthy",
+      "latest": {
+        "id": "44efcdaf-2747-4134-ba92-8396e2057103",
+        "endpointId": "0x5a1c9bed2bd5f5737c46516b224f84075009452600a9df5b19f3a9a3215a51d9",
+        "monitorId": "monitor-f6416607-96cb-49d9-b434-80cf718e63b9",
+        "checkedAt": "2026-11-07T15:54:37.842Z",
+        "success": true,
+        "latencyMs": 502,
+        "chainId": 677,
+        "blockHeight": "29443251",
+        "genesisHash": null,
+        "errorCode": null,
+        "warnings": [],
+        "methods": [
+          "eth_chainId",
+          "eth_blockNumber"
+        ],
+        "simulated": false
+      }
+    }
+  ],
+  "portaldot": {
+    "chainId": 420420777,
+    "registry": "0x9c0d5b9cca49f69ffc7384d5da263689a21f7e22",
+    "confirmedEvents": 2
+  },
+  "browser": [
+    {
+      "width": 1280,
+      "navigation": true,
+      "proofDownload": true,
+      "portaldotPreserved": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "navigation": true,
+      "proofDownload": true,
+      "portaldotPreserved": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "width": 360,
+      "navigation": true,
+      "proofDownload": true,
+      "portaldotPreserved": true,
+      "overflow": false,
+      "errors": []
+    }
+  ]
+}

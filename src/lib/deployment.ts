@@ -7,9 +7,9 @@ import { chainClients, registryAbi } from "./registry";
 const hash = z.string().regex(/^0x[0-9a-fA-F]{64}$/);
 const address = z.string().regex(/^0x[0-9a-fA-F]{40}$/);
 const deploymentRecord = z.object({
-  schema: z.literal("pulsegrid.deployment.v1"), network: z.enum(["testnet", "local"]), networkName: z.string(), chainId: z.number().int(),
+  schema: z.literal("pulsegrid.deployment.v1"), network: z.enum(["testnet", "local", "bot-mainnet"]), networkName: z.string(), chainId: z.number().int(),
   contract: address, reporter: address, transactionHash: hash, blockNumber: z.string().regex(/^\d+$/), blockHash: hash,
-  status: z.literal("success"), gasUsed: z.string(), effectiveGasPriceWei: z.string(), paidFeeTPOT: z.string(),
+  status: z.literal("success"), gasUsed: z.string(), effectiveGasPriceWei: z.string(), paidFeeTPOT: z.string().optional(), paidFeeNative: z.string().optional(), nativeCurrency: z.string().optional(),
   deploymentCodeHash: hash, runtimeCodeHash: hash, deployedAt: z.iso.datetime()
 });
 

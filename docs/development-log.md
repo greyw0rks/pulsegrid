@@ -1,5 +1,12 @@
 # Development record
 
+## November 7, 2026
+
+- Deployed the unchanged single-reporter IncidentRegistry to BOT Chain mainnet (677) from the supplied funded wallet. Contract `0x368d564dd8166d1967f21c7fbaaf87883ef85c83`, transaction `0xed72c57368a4d20ff60bb1658d524fd323aa1ac45274a59a2284ae237c4ad929`, block 29441534, paid fee 0.01098364 BOT. The successful receipt, runtime code, authorized reporter, and BOTScan source verification match the retained deployment record.
+- Kept the existing website address. Added BOT pages at `https://pulsegrid-psi.vercel.app/bot`, backed by isolated BOT configuration and database schema; existing Portaldot registry, records, and scheduled worker remain separate. Kept operator requests and evidence downloads under the correct network path and made the navigation fit mobile screens.
+- At the user's request, deployed the five-minute monitoring job to the separate Convex project `pulsegrid-monitor`, production `sincere-hamster-832`. The protected endpoint retains observations and indexes registry events; the web deployment and scheduler do not receive the funded wallet key.
+- Validation: 27 application checks, 15 Solidity checks including fuzzing, TypeScript, production builds for both web deployments, and Convex production typecheck passed. ESLint has no errors and retains one pre-existing warning in the local E2E script. Anonymous live contract proof, operator/monitor authorization, desktop/390px/360px layouts, network navigation, evidence download, and preservation of both original Portaldot confirmed events passed. Live evidence is retained under `docs/evidence/`.
+
 ## November 3, 2026
 
 - Published the repository to GitHub and connected it to the Vercel project. The public landing page and dashboard are hosted at https://pulsegrid-psi.vercel.app; the unsuffixed alias was unavailable.

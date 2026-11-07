@@ -27,8 +27,9 @@ export function endpointForProbe(row: EndpointRow): ProbeEndpoint {
   return { id: row.id, url: row.url, kind: row.kind, expectedChainId: row.expected_chain_id,
     expectedGenesisHash: row.expected_genesis_hash, timeoutMs: row.timeout_ms, simulated: row.simulated, faultMode: row.fault_mode };
 }
-export async function dueEndpoints(): Promise<EndpointRow[]> {
-  return (await pool.query<EndpointRow>("SELECT * FROM endpoints WHERE enabled AND next_check_at <= now() ORDER BY next_check_at LIMIT 4")).rows;
+export async function dueEndpoints(lookAheadMs = 0): Promise<EndpointRow[]> {
+  if (!Number.isInteger(lookAheadMs) || lookAheadMs < 0 || lookAheadMs > 5000) throw new Error("Invalid endpoint scheduling tolerance");
+  return (await pool.query<EndpointRow>("SELECT * FROM endpoints WHERE enabled AND next_check_at <= now() + ($1 * interval '1 millisecond') ORDER BY next_check_at LIMIT 4", [lookAheadMs])).rows;
 }
 async function retainEvidence(client: PoolClient, evidence: ReturnType<typeof buildEvidence>) {
   await client.query("INSERT INTO evidence(hash,canonical_json,bundle) VALUES($1,$2,$3) ON CONFLICT(hash) DO NOTHING", [evidence.hash, evidence.canonical, JSON.stringify(evidence.bundle)]);

@@ -30,7 +30,7 @@ export async function getOverview(): Promise<Overview> {
   const base: Overview = {
     generatedAt: new Date().toISOString(), databaseAvailable: false, error: null,
     network: { name: config.networkName, mode: config.network, chainId: config.chainId, registry: config.registry ?? null,
-      signerConfigured, nodeConsole: "https://node-console.portaldot.dev/" },
+      signerConfigured, nodeConsole: config.nodeConsole },
     monitor: { id: null, heartbeatAt: null, startedAt: null, stale: true, state: "unavailable", lastError: null },
     endpoints: [], incidents: [], ledger: { confirmed: 0, pending: 0, failed: 0, latest: null }, drillsEnabled: config.drillsEnabled
   };

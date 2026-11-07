@@ -1,0 +1,21 @@
+{
+  "project": "greyw0rks:pulsegrid-monitor",
+  "deployment": "sincere-hamster-832",
+  "environment": "production",
+  "dashboard": "https://dashboard.convex.dev/t/greyw0rks/pulsegrid-monitor/sincere-hamster-832",
+  "job": "BOT Chain RPC monitoring",
+  "intervalMinutes": 5,
+  "function": "monitor:run",
+  "endpoint": "https://pulsegrid-psi.vercel.app/bot/api/monitor",
+  "registrationVerifiedBy": "Successful automatic production invocation in Convex logs",
+  "automaticInvocation": {
+    "caller": "Cron",
+    "udfType": "Action",
+    "identifier": "monitor:run",
+    "startedAtUnixSeconds": 1794067711.141943,
+    "finishedAtUnixSeconds": 1794067712.3256805,
+    "executionId": "624e52ee-53a1-470d-bfdd-ef82fa501745",
+    "error": null,
+    "willRetry": false
+  }
+}

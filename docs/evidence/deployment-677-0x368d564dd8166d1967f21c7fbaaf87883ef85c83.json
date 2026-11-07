@@ -1,0 +1,19 @@
+{
+  "schema": "pulsegrid.deployment.v1",
+  "network": "bot-mainnet",
+  "networkName": "BOT Chain mainnet",
+  "chainId": 677,
+  "contract": "0x368d564dd8166d1967f21c7fbaaf87883ef85c83",
+  "reporter": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "transactionHash": "0xed72c57368a4d20ff60bb1658d524fd323aa1ac45274a59a2284ae237c4ad929",
+  "blockNumber": "29441534",
+  "blockHash": "0xebdf5b5a1ed23f59aab9327e043e98c65c2186ba8d6d9b679f1144d3ca4c48b8",
+  "status": "success",
+  "gasUsed": "549182",
+  "effectiveGasPriceWei": "20000000000",
+  "paidFeeNative": "0.01098364",
+  "nativeCurrency": "BOT",
+  "deploymentCodeHash": "0xa2b3e6211721dc0510947c2e70a914d4248cda137400b5afd20e7f657c6d8484",
+  "runtimeCodeHash": "0x6ae7d3e9161404577f27141f6eebc9e1a826c259319ce64b851b137e235ef4d9",
+  "deployedAt": "2026-11-07T15:33:11.767Z"
+}

@@ -11,12 +11,13 @@ process.on("SIGINT", () => shutdown.abort());
 process.on("SIGTERM", () => shutdown.abort());
 const log = (event: string, fields: Record<string, unknown> = {}) => console.log(JSON.stringify({ at: new Date().toISOString(), event, ...fields }));
 const lock = await pool.connect();
+const workerLockId = runtimeConfig().chainId;
 let lockLost = false;
 lock.on("error", () => { lockLost = true; shutdown.abort(); });
-const acquired = (await lock.query<{ acquired: boolean }>("SELECT pg_try_advisory_lock(420420777) AS acquired")).rows[0].acquired;
+const acquired = (await lock.query<{ acquired: boolean }>("SELECT pg_try_advisory_lock($1) AS acquired", [workerLockId])).rows[0].acquired;
 if (!acquired) { lock.release(); await pool.end(); throw new Error("Another Pulsegrid worker is already running"); }
 const monitor = (await pool.query<{ id: string }>("SELECT id FROM monitors LIMIT 1")).rows[0];
-if (!monitor) { await lock.query("SELECT pg_advisory_unlock(420420777)"); lock.release(); await pool.end(); throw new Error("Run the database setup command first"); }
+if (!monitor) { await lock.query("SELECT pg_advisory_unlock($1)", [workerLockId]); lock.release(); await pool.end(); throw new Error("Run the database setup command first"); }
 await pool.query("UPDATE monitors SET started_at=now(),heartbeat_at=now(),state='starting',last_error=NULL WHERE id=$1", [monitor.id]);
 log("worker_started", { monitorId: monitor.id, network: runtimeConfig().networkName });
 let lastMaintenance = 0;
@@ -52,7 +53,7 @@ try {
   }
 } finally {
   if (!once) await pool.query("UPDATE monitors SET state='stopped',heartbeat_at=now() WHERE id=$1", [monitor.id]).catch(() => undefined);
-  if (!lockLost) await lock.query("SELECT pg_advisory_unlock(420420777)").catch(() => undefined);
+  if (!lockLost) await lock.query("SELECT pg_advisory_unlock($1)", [workerLockId]).catch(() => undefined);
   lock.release();
   await pool.end();
   log(once ? "worker_cycle_finished" : "worker_stopped", { lockLost });

@@ -1,0 +1,14 @@
+{
+  "name": "pulsegrid-monitor-scheduler",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "convex deploy"
+  },
+  "dependencies": {
+    "convex": "^1.47.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

@@ -19,7 +19,7 @@ export default async function OverviewPage() {
       <AutoRefresh />
       <header className="page-head">
         <div>
-          <h1>Portaldot endpoint pulse</h1>
+          <h1>{overview.network.mode === "bot-mainnet" ? "BOT Chain endpoint pulse" : "Portaldot endpoint pulse"}</h1>
           <p className="lede">Independent RPC observations, incident evidence, transaction state, and confirmed registry receipts.</p>
         </div>
         <div className="timestamp">Snapshot<br />{formatDate(overview.generatedAt)}</div>
@@ -32,7 +32,7 @@ export default async function OverviewPage() {
         </div>
       ) : null}
 
-      <div className="network-note"><StatusBadge status={overview.network.mode === "local" ? "pending" : "unobserved"} label={overview.network.mode === "local" ? "Local integration chain · 31337" : "Portaldot testnet · 420420777"} />
+      <div className="network-note"><StatusBadge status={overview.network.mode === "local" ? "pending" : "unobserved"} label={overview.network.mode === "local" ? "Local integration chain · 31337" : overview.network.mode === "bot-mainnet" ? "BOT Chain mainnet · 677" : "Portaldot testnet · 420420777"} />
         <span>{overview.network.registry ? "Registry configured · confirmation tracked separately" : "Observation mode · registry deployment pending"}</span>
         <Link className="button" href="/operator">Manage endpoints</Link></div>
 
@@ -114,7 +114,7 @@ export default async function OverviewPage() {
           <div className="metric"><span>Pending jobs</span><strong>{overview.ledger.pending}</strong></div>
           <div className="metric"><span>Failed jobs</span><strong>{overview.ledger.failed}</strong></div>
         </div>
-        <p style={{ marginTop: 22 }}><a className="button" href={overview.network.nodeConsole} target="_blank" rel="noreferrer">Open node console <ExternalLink aria-hidden="true" size={14} /></a></p>
+        <p style={{ marginTop: 22 }}><a className="button" href={overview.network.nodeConsole} target="_blank" rel="noreferrer">{overview.network.mode === "bot-mainnet" ? "Open BOTScan" : "Open node console"} <ExternalLink aria-hidden="true" size={14} /></a></p>
       </section>
     </div>
   );

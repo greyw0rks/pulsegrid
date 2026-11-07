@@ -17,7 +17,7 @@ export const registryAbi = parseAbi([
 export function chainClients() {
   const config = runtimeConfig();
   const chain = defineChain({ id: config.chainId, name: config.networkName,
-    nativeCurrency: { name: config.network === "local" ? "Test Ether" : "Test POT", symbol: config.network === "local" ? "ETH" : "POT", decimals: 18 },
+    nativeCurrency: config.nativeCurrency,
     rpcUrls: { default: { http: [config.evmRpc] } } });
   const transport = http(config.evmRpc, { timeout: 12000, retryCount: 0 });
   const publicClient = createPublicClient({ chain, transport });

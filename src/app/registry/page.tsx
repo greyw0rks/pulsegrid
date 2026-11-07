@@ -5,11 +5,14 @@ import { formatDate, shortHash } from "@/lib/format";
 import { getRegistryEvents } from "@/lib/queries";
 import { getDeploymentProof } from "@/lib/deployment";
 import { AutoRefresh } from "@/components/auto-refresh";
+import { runtimeConfig } from "@/lib/env";
+import { appPath } from "@/lib/paths";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Registry events" };
 
 export default async function RegistryPage() {
+  const explorer = runtimeConfig().explorerUrl;
   const [result, proof] = await Promise.all([
     getRegistryEvents().then(events => ({ available: true, events })).catch(() => ({ available: false, events: [] })), getDeploymentProof()
   ]);
@@ -22,11 +25,11 @@ export default async function RegistryPage() {
         <div className="panel-head deployment-head"><h2 id="deployment-heading">Registry deployment</h2><StatusBadge status={proof.state === "verified" ? "confirmed" : "pending"} label={proof.state === "verified" ? "Verified on chain" : proof.state} /></div>
         <div className="deployment-content"><p className="muted">{proof.reason}</p>
           <dl className="deployment-facts"><div><dt>Network</dt><dd>{proof.network} · {proof.chainId}</dd></div>
-            <div><dt>Contract</dt><dd className="mono">{proof.contract ?? "Awaiting deployment"}</dd></div>
+            <div><dt>Contract</dt><dd className="mono">{proof.contract && explorer ? <a href={`${explorer}/address/${proof.contract}`}>{proof.contract}</a> : proof.contract ?? "Awaiting deployment"}</dd></div>
             {proof.record ? <><div><dt>Authorized reporter</dt><dd className="mono">{proof.record.reporter}</dd></div>
-              <div><dt>Deployment transaction</dt><dd className="mono">{proof.record.transactionHash}</dd></div>
+              <div><dt>Deployment transaction</dt><dd className="mono">{explorer ? <a href={`${explorer}/tx/${proof.record.transactionHash}`}>{proof.record.transactionHash}</a> : proof.record.transactionHash}</dd></div>
               <div><dt>Confirmed block</dt><dd>{proof.record.blockNumber}</dd></div></> : null}</dl>
-          {proof.record ? <a className="button" href="/api/deployment" download>Download deployment proof</a> : null}
+          {proof.record ? <a className="button" href={appPath("/api/deployment")} download>Download deployment proof</a> : null}
         </div>
       </section>
       <section className="section">

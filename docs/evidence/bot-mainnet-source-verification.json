@@ -1,0 +1,11 @@
+{
+  "name": "IncidentRegistry",
+  "compiler_version": "v0.8.28+commit.7893614a",
+  "optimization_enabled": true,
+  "optimization_runs": 200,
+  "evm_version": "paris",
+  "verified_at": "2026-11-07T15:35:41.430856Z",
+  "is_verified": true,
+  "constructor_args": "0x000000000000000000000000e79bb36b53835f0740bd4a9684f5c84d8fb9b52c",
+  "sourceAvailable": true
+}

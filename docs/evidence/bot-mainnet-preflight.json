@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-07T15:31:35.845Z",
+  "chainId": 677,
+  "network": "BOT Chain mainnet",
+  "deployer": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "balanceBOT": "1",
+  "pendingNonce": 0,
+  "estimatedGas": "554708",
+  "gasPriceWei": "20000000000",
+  "maximumFeeBOT": "0.01164886",
+  "budgetBOT": "0.1",
+  "logQuery": {
+    "fromBlock": "29441307",
+    "toBlock": "29441406",
+    "logs": 0
+  },
+  "submitted": false
+}

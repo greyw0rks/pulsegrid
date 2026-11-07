@@ -37,7 +37,7 @@ if (existsSync(attemptPath)) {
   await mkdir(dirname(attemptPath), { recursive: true, mode: 0o700 });
   // Retain the same signed transaction across retries, before submitting it to the RPC.
   await writeFile(attemptPath, `${JSON.stringify(attempt, null, 2)}\n`, { flag: "wx", mode: 0o600 });
-  console.log(JSON.stringify({ event: "deployment_prepared", transactionHash: attempt.transactionHash, estimatedMaxFeeTPOT: formatEther(maxFee) }));
+  console.log(JSON.stringify({ event: "deployment_prepared", transactionHash: attempt.transactionHash, estimatedMaxFeeNative: formatEther(maxFee), nativeCurrency: config.nativeCurrency.symbol }));
 }
 const transactionHash = attempt.transactionHash;
 const alreadyMined = await publicClient.getTransactionReceipt({ hash: transactionHash }).catch(error => {
@@ -65,7 +65,9 @@ const record = {
   status: receipt.status,
   gasUsed: receipt.gasUsed.toString(),
   effectiveGasPriceWei: receipt.effectiveGasPrice.toString(),
-  paidFeeTPOT: formatEther(receipt.gasUsed * receipt.effectiveGasPrice),
+  ...(config.network === "testnet" ? { paidFeeTPOT: formatEther(receipt.gasUsed * receipt.effectiveGasPrice) } : {}),
+  paidFeeNative: formatEther(receipt.gasUsed * receipt.effectiveGasPrice),
+  nativeCurrency: config.nativeCurrency.symbol,
   deploymentCodeHash: codeHash,
   runtimeCodeHash: keccak256(code),
   deployedAt: new Date().toISOString()

@@ -3,17 +3,30 @@ import Link from "next/link";
 import { Activity, ArrowDown, ArrowRight, ArrowUpRight, Check, FileCheck2, GitBranch, RadioTower, ShieldCheck } from "lucide-react";
 import deployment from "../../docs/evidence/deployment-420420777-0x9c0d5b9cca49f69ffc7384d5da263689a21f7e22.json";
 import drill from "../../docs/evidence/testnet-drill-0x9c0d5b9cca49f69ffc7384d5da263689a21f7e22.json";
+import { runtimeConfig } from "@/lib/env";
+import { BotLanding } from "@/components/bot-landing";
 
-export const metadata: Metadata = {
+export const dynamic = "force-dynamic";
+
+const portaldotMetadata: Metadata = {
   title: "Pulsegrid — Know what failed. Prove what recovered.",
   description: "Independent Portaldot RPC monitoring. Trace an incident from the first failed check to verifiable evidence and confirmed on-chain recovery.",
   robots: { index: true, follow: true },
   openGraph: { title: "Pulsegrid — Know what failed. Prove what recovered.", description: "RPC observations, retrievable evidence, and confirmed Portaldot testnet receipts.", type: "website" }
 };
 
+export function generateMetadata(): Metadata {
+  return runtimeConfig().network === "bot-mainnet" ? {
+    title: "Pulsegrid on BOT Chain — RPC monitoring",
+    description: "BOT Chain mainnet RPC monitoring with retrievable incident evidence and on-chain recovery reports.",
+    robots: { index: true, follow: true }
+  } : portaldotMetadata;
+}
+
 const source = "https://github.com/greyw0rks/pulsegrid";
 
 export default function LandingPage() {
+  if (runtimeConfig().network === "bot-mainnet") return <BotLanding />;
   return <div className="landing shell">
     <section className="landing-hero" aria-labelledby="landing-title">
       <div className="landing-copy"><div className="landing-eyebrow"><RadioTower size={14} aria-hidden="true" /> PORTALDOT / NODE OPERATIONS</div>

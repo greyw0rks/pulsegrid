@@ -1,4 +1,5 @@
 "use client";
+import { appPath } from "@/lib/paths";
 
 import { useRef, useState, type FormEvent } from "react";
 import { KeyRound, Pause, Play, Plus, RefreshCw } from "lucide-react";
@@ -16,7 +17,7 @@ export function OperatorConsole({ initial, tokenConfigured, allowedHosts, schedu
   const heading = useRef<HTMLHeadingElement>(null);
 
   async function request(path: string, method = "GET", body?: unknown) {
-    const response = await fetch(path, { method, cache: "no-store", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    const response = await fetch(appPath(path), { method, cache: "no-store", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
     const data = await response.json();
     if (response.status === 401) { setUnlocked(false); throw new Error("Operator token was not accepted. Enter the configured token and try again."); }
@@ -25,7 +26,7 @@ export function OperatorConsole({ initial, tokenConfigured, allowedHosts, schedu
   }
 
   async function refresh() {
-    const response = await fetch("/api/overview", { cache: "no-store" });
+    const response = await fetch(appPath("/api/overview"), { cache: "no-store" });
     if (!response.ok) throw new Error("Could not refresh endpoint observations.");
     const next = await response.json() as Overview;
     setOverview(next);
