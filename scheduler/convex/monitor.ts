@@ -1,9 +1,9 @@
 "use node";
-import { internalActionGeneric as internalAction } from "convex/server";
+import { internalActionGeneric as internalAction, makeFunctionReference } from "convex/server";
 
 export const run = internalAction({
   args: {},
-  handler: async () => {
+  handler: async (ctx) => {
     const endpoint = process.env.PULSEGRID_MONITOR_URL || "https://pulsegrid-psi.vercel.app/bot/api/monitor";
     const secret = process.env.PULSEGRID_MONITOR_SECRET;
     const url = new URL(endpoint);
@@ -16,6 +16,7 @@ export const run = internalAction({
     const result = await response.json() as { state?: string; checked?: number; at?: string };
     if (typeof result.state !== "string") throw new Error("Pulsegrid monitoring returned an invalid result");
     console.log("BOT monitoring cycle", JSON.stringify(result));
-    return result;
+    const reporting = await ctx.runAction(makeFunctionReference<"action">("reporter:run"), {});
+    return { ...result, reporting };
   }
 });

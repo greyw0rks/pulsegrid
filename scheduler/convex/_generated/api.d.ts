@@ -10,6 +10,7 @@
 
 import type * as crons from "../crons.js";
 import type * as monitor from "../monitor.js";
+import type * as reporter from "../reporter.js";
 
 import type {
   ApiFromModules,
@@ -20,6 +21,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   crons: typeof crons;
   monitor: typeof monitor;
+  reporter: typeof reporter;
 }>;
 
 /**

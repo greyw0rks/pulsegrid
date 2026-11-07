@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-11-07T16:51:32.306Z",
+  "deployment": "sincere-hamster-832",
+  "environment": "production",
+  "intervalMinutes": 5,
+  "signingBackend": "Private Convex Node action",
+  "websiteHasSigner": false,
+  "maximumFeeBOT": "0.05",
+  "rolling24HourReservedFeesBOT": "0.25",
+  "automaticMonitoring": {
+    "identifier": "monitor:run",
+    "caller": "Cron",
+    "executionId": "b17d1080-4a43-4b35-af7d-998b94b97bbf",
+    "parentExecutionId": null,
+    "startedAt": "2026-11-07T16:43:31.147Z",
+    "finishedAt": "2026-11-07T16:43:34.744Z",
+    "error": null,
+    "willRetry": false
+  },
+  "automaticReporting": {
+    "identifier": "reporter:run",
+    "caller": "Action",
+    "executionId": "239ccb6a-ab74-4cf0-884d-ea1ab8e75a39",
+    "parentExecutionId": "b17d1080-4a43-4b35-af7d-998b94b97bbf",
+    "startedAt": "2026-11-07T16:43:33.276Z",
+    "finishedAt": "2026-11-07T16:43:34.718Z",
+    "error": null,
+    "willRetry": false
+  }
+}

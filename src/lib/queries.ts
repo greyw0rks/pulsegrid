@@ -82,7 +82,7 @@ export async function getOverview(): Promise<Overview> {
 export async function getIncident(id: string) {
   const [incident, timeline] = await Promise.all([
     pool.query<IncidentRow>(`${incidentSql} WHERE i.id=$1`, [id]),
-    pool.query<TimelineRow>("SELECT * FROM timeline WHERE incident_id=$1 ORDER BY occurred_at,id", [id])
+    pool.query<TimelineRow>("SELECT * FROM timeline WHERE incident_id=$1 AND type<>'fee_reserved' ORDER BY occurred_at,id", [id])
   ]);
   if (!incident.rows[0]) return null;
   return { incident: incidentView(incident.rows[0]), timeline: timeline.rows.map(timelineView) };

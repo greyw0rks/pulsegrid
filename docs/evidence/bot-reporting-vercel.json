@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-11-07T16:52:45.964Z",
+  "deploymentId": "dpl_DP5P4Xa9FjdphoKWQQ9xkSjyucv4",
+  "readyState": "READY",
+  "target": "production",
+  "project": "pulsegrid-bot",
+  "productionURL": "https://pulsegrid-bot.vercel.app",
+  "website": "https://pulsegrid-psi.vercel.app/bot",
+  "verification": "Vercel production deployment completed successfully; anonymous public API and browser smoke passed."
+}

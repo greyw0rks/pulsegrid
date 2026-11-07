@@ -1,30 +1,24 @@
 {
   "event": "local_e2e_passed",
-  "checkedAt": "2026-11-03T09:00:38.859Z",
+  "checkedAt": "2026-11-07T16:39:31.838Z",
   "network": "Local integration chain",
   "simulated": true,
   "chainId": 31337,
   "registry": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
   "deploymentTransaction": "0xfec40c8ae65d9e55a71922cb680277b502e2f564aff63eb94d9911660e7e2cac",
-  "incidentId": "1b6033ac-f975-4b25-b241-fefa8a590c5e",
-  "openingEvidence": "0x79a6fa2a3269b24bddbd2614c878665a18a1a1a9f5c4bf5c198309c79e4bdcac",
-  "recoveryEvidence": "0xb21a26ef6bce8c3e4fde02ba483e990638b2022f5843a3de0707a2b5a3fd6964",
-  "openingTransaction": "0xa4a7dff6e0d55e124de9c37de4b61811bb7c587f3e0c0f8d42718ccb509902b8",
-  "recoveryTransaction": "0x9a1b9295853c710ffa335d0981cce6e9cbf031cc8fa314062e6f47053a3b5d66",
+  "incidentId": "ca42a97b-4102-4dee-b162-9d74051d8fd1",
+  "openingEvidence": "0xb8322e615b1a8816ccbeebb2ee1131f3028a8b4b1dd56f95ba57572061aa6577",
+  "recoveryEvidence": "0x6f6b0debaecedae9dfedc127f5e71931dc18dbf11dc1a4b6e1c793d5a2dcfc42",
+  "openingTransaction": "0x71b25a39334942adbe867edb6d6d4bbc87095b5f3e0de7c86cdbf46df1b83765",
+  "recoveryTransaction": "0xa40f1a28a0aceb11c87030bbcf4175c68607dd0407c81e804e09fe8a8397aa0a",
   "evidenceDirectory": "docs/evidence/local-drill",
   "registryEvents": 2,
   "workerRestarted": true,
   "openingReceiptReconciled": true,
-  "browserVerification": {
-    "status": "passed",
-    "widths": [
-      1440,
-      390,
-      360
-    ],
-    "operator": "authorization, allowlist, register, pause/resume, lock, keyboard focus",
-    "evidenceDownloadVerified": true,
-    "errors": []
-  },
+  "scheduledWorkerCycleVerified": true,
+  "scheduledReporterOpeningAndRecoveryVerified": true,
+  "scheduledReporterRetriesDidNotDuplicate": true,
+  "scheduledReporterFeeReservations": 2,
+  "browserVerification": null,
   "note": "Ephemeral local Anvil and isolated PostgreSQL schema. Browser registration is a configuration fixture with the worker stopped; it is not extra telemetry or public testnet execution."
 }

@@ -1,8 +1,10 @@
-import { decodeEventLog, encodeFunctionData, keccak256, TransactionReceiptNotFoundError, type Hex, type TransactionReceipt } from "viem";
+import { decodeEventLog, encodeFunctionData, keccak256, recoverTransactionAddress, stringToHex, TransactionReceiptNotFoundError, type Hex, type TransactionReceipt, type TransactionSerialized } from "viem";
 import type { PoolClient } from "pg";
 import { pool, transaction } from "./db";
 import { chainClients, registryAbi } from "./registry";
 import { timelineEvent } from "./store";
+import { evidenceSchema } from "./evidence";
+import { assertDailyReportingBudget, reportingTransactionCost } from "./reporting-policy";
 
 type Clients = ReturnType<typeof chainClients>;
 type Job = { id: string; incident_id: string; kind: "open" | "resolve"; evidence_hash: Hex; state: string; attempts: number;
@@ -56,7 +58,7 @@ async function confirmJob(job: Job, receipt: TransactionReceipt, clients: Client
 
 async function retryJob(job: Job, error: unknown) {
   const attempts = job.attempts + 1;
-  const code = error instanceof LedgerFailure ? error.code : "RPC_OR_TRANSACTION_ERROR";
+  const code = error instanceof LedgerFailure ? error.code : error instanceof Error && /^REPORT_[A-Z_]+$/.test(error.message) ? error.message : "RPC_OR_TRANSACTION_ERROR";
   const permanent = code.endsWith("EVIDENCE_MISMATCH");
   const exhausted = permanent || attempts >= 8;
   const delay = Math.min(300000, 5000 * 2 ** Math.min(attempts, 8));
@@ -72,7 +74,7 @@ async function retryJob(job: Job, error: unknown) {
 }
 async function deferJob(job: Job, ms = 5000) { await pool.query("UPDATE outbox SET next_attempt_at=$2 WHERE id=$1", [job.id, new Date(Date.now() + ms)]); }
 
-async function processJob(job: Job, clients: Clients): Promise<string> {
+async function processJob(job: Job, clients: Clients, assertLock: () => void): Promise<string> {
   const { publicClient, wallet, account, config, chain } = clients;
   if (job.transaction_hash) {
     const receipt = await receiptOrNull(clients, job.transaction_hash);
@@ -97,16 +99,31 @@ async function processJob(job: Job, clients: Clients): Promise<string> {
   }
   if (job.kind === "resolve" && chainId === 0n) { await deferJob(job); return "awaiting_open"; }
   if (!account || !wallet) return "signer_missing";
+  const data = job.kind === "open" ? encodeFunctionData({ abi: registryAbi, functionName: "openIncident", args: [job.report_key, job.endpoint_id, job.severity, job.evidence_hash] })
+    : encodeFunctionData({ abi: registryAbi, functionName: "resolveIncident", args: [chainId, job.evidence_hash] });
+  const bounded = config.network === "bot-mainnet" || process.env.PULSEGRID_REPORTING_ENABLED === "true";
+  if (bounded) {
+    const document = (await pool.query<{ canonical_json: string }>("SELECT canonical_json FROM evidence WHERE hash=$1", [job.evidence_hash])).rows[0];
+    if (!document || keccak256(stringToHex(document.canonical_json)) !== job.evidence_hash) throw new LedgerFailure("SOURCE_EVIDENCE_MISMATCH");
+    const bundle = evidenceSchema.parse(JSON.parse(document.canonical_json));
+    if (bundle.incidentId !== job.incident_id || bundle.reportKey !== job.report_key || bundle.endpointId !== job.endpoint_id || bundle.transition !== job.kind) throw new LedgerFailure("SOURCE_EVIDENCE_MISMATCH");
+  }
   if (!job.raw_transaction) {
     const balance = await publicClient.getBalance({ address: account.address });
     if (balance === 0n) { await deferJob(job, 30000); return "waiting_funds"; }
-    const data = job.kind === "open" ? encodeFunctionData({ abi: registryAbi, functionName: "openIncident", args: [job.report_key, job.endpoint_id, job.severity, job.evidence_hash] })
-      : encodeFunctionData({ abi: registryAbi, functionName: "resolveIncident", args: [chainId, job.evidence_hash] });
     const prepared = await publicClient.prepareTransactionRequest({ account, chain, to: config.registry!, data });
+    assertLock();
     const raw = await wallet.signTransaction(prepared);
     const hash = keccak256(raw);
+    const maximumCost = bounded ? reportingTransactionCost(raw, { chainId: config.chainId, registry: config.registry!, data }) : null;
     // Persist signed bytes before broadcasting. Every retry sends these same bytes until a receipt or revert is known.
     await transaction(async client => {
+      assertLock();
+      if (maximumCost !== null) {
+        const reserved = (await client.query<{ reserved: string }>("SELECT COALESCE(sum(detail::numeric),0)::text AS reserved FROM timeline WHERE type='fee_reserved' AND occurred_at>now()-interval '24 hours'")).rows[0].reserved;
+        assertDailyReportingBudget(BigInt(reserved), maximumCost);
+        await timelineEvent(client, job.incident_id, "fee_reserved", new Date(), maximumCost.toString(), `${job.id}:fee:${hash}`, hash);
+      }
       await client.query("UPDATE outbox SET raw_transaction=$2,transaction_hash=$3 WHERE id=$1", [job.id, raw, hash]);
       const column = job.kind === "open" ? "open_tx_hash" : "resolve_tx_hash";
       await client.query(`UPDATE incidents SET ${column}=$2,ledger_status=$3 WHERE id=$1`, [job.incident_id, hash, `${job.kind === "open" ? "open" : "resolution"}_prepared`]);
@@ -114,6 +131,11 @@ async function processJob(job: Job, clients: Clients): Promise<string> {
     });
     job = { ...job, raw_transaction: raw, transaction_hash: hash };
   }
+  if (bounded) {
+    reportingTransactionCost(job.raw_transaction!, { chainId: config.chainId, registry: config.registry!, data });
+    if (keccak256(job.raw_transaction!) !== job.transaction_hash || (await recoverTransactionAddress({ serializedTransaction: job.raw_transaction! as TransactionSerialized })).toLowerCase() !== account.address.toLowerCase()) throw new LedgerFailure("SIGNED_TRANSACTION_EVIDENCE_MISMATCH");
+  }
+  assertLock();
   await publicClient.sendRawTransaction({ serializedTransaction: job.raw_transaction! });
   await transaction(async client => {
     await client.query("UPDATE outbox SET state='submitted',last_error=NULL,next_attempt_at=$2 WHERE id=$1", [job.id, new Date(Date.now() + 5000)]);
@@ -150,7 +172,7 @@ export async function indexRegistry(clients = chainClients()) {
   }
 }
 
-export async function ledgerTick(): Promise<string> {
+export async function ledgerTick(assertLock: () => void = () => undefined): Promise<string> {
   const clients = chainClients();
   if (!clients.config.registry) return "not_deployed";
   if (await clients.publicClient.getChainId() !== clients.config.chainId) return "chain_mismatch";
@@ -164,7 +186,8 @@ export async function ledgerTick(): Promise<string> {
   }
   let state = "ready";
   for (const job of jobs) {
-    try { state = await processJob(job, clients); }
+    assertLock();
+    try { state = await processJob(job, clients, assertLock); }
     catch (error) { await retryJob(job, error); state = "retrying"; }
   }
   return state;

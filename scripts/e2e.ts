@@ -116,6 +116,7 @@ try {
     ...process.env,
     NODE_ENV: "test",
     DATABASE_URL: databaseUrl.toString(),
+    PULSEGRID_DB_SCHEMA: "",
     PULSEGRID_NETWORK: "local",
     PULSEGRID_EVM_RPC: rpcUrl,
     PULSEGRID_REGISTRY_ADDRESS: deployment.contractAddress,
@@ -189,6 +190,35 @@ try {
   const scheduledState = (await database.query<{ state: string }>("SELECT state FROM monitors WHERE id=$1", [monitorId])).rows[0]?.state;
   if (scheduledState !== "observing:ready") throw new Error("A successful scheduled cycle did not retain its observed ready state");
   if (Number((await database.query("SELECT count(*) FROM registry_events")).rows[0].count) !== 2) throw new Error("Scheduled worker duplicated retained registry events");
+
+  // Exercise the same signing cycle used by the private Convex action, on the isolated local chain.
+  Object.assign(process.env, workerEnv, { PULSEGRID_REPORTING_ENABLED: "true", PULSEGRID_REPORT_MAX_COST: "0.05", PULSEGRID_REPORT_DAILY_MAX_COST: "0.25" });
+  const { runReporterCycle } = await import("../src/lib/reporter-cycle");
+  const { pool: reporterPool } = await import("../src/lib/db");
+  const { recordProbe, endpointForProbe } = await import("../src/lib/store");
+  const { probeEndpoint } = await import("../src/lib/probe");
+  const reporterEndpoint = endpointIdFor("scheduled-reporter-e2e");
+  await database.query(`INSERT INTO endpoints(id,name,url,kind,expected_chain_id,interval_ms,timeout_ms,failure_threshold,recovery_threshold,enabled,simulated,fault_mode)
+    VALUES($1,'Controlled scheduled reporter drill',$2,'evm',31337,1000,1000,1,1,false,true,'timeout')`, [reporterEndpoint, rpcUrl]);
+  for (const mode of ["timeout", "normal"] as const) {
+    await database.query("UPDATE endpoints SET fault_mode=$2 WHERE id=$1", [reporterEndpoint, mode]);
+    const endpoint = (await reporterPool.query("SELECT * FROM endpoints WHERE id=$1", [reporterEndpoint])).rows[0];
+    const observed = await recordProbe(reporterEndpoint, await probeEndpoint(endpointForProbe(endpoint)), monitorId);
+    if (observed.action !== (mode === "timeout" ? "open" : "resolve")) throw new Error("Scheduled reporter detection did not queue the transition");
+    await runReporterCycle();
+    await waitFor(`scheduled reporter ${mode} confirmation`, async () => {
+      await database!.query("UPDATE outbox SET next_attempt_at=now() WHERE incident_id=$1", [observed.incidentId]);
+      await runReporterCycle();
+      const state = (await database!.query("SELECT ledger_status FROM incidents WHERE id=$1", [observed.incidentId])).rows[0]?.ledger_status;
+      return state === (mode === "timeout" ? "open_confirmed" : "resolved") ? true : null;
+    });
+  }
+  const retainedAfterReporter = Number((await database.query("SELECT count(*) FROM registry_events")).rows[0].count);
+  await runReporterCycle();
+  if (retainedAfterReporter !== 4 || Number((await database.query("SELECT count(*) FROM registry_events")).rows[0].count) !== 4) throw new Error("Scheduled reporter did not confirm exactly two additional transitions");
+  const reservations = Number((await database.query("SELECT count(*) FROM timeline WHERE type='fee_reserved'")).rows[0].count);
+  if (reservations !== 2) throw new Error("Scheduled reporter fee reservations were duplicated or missing");
+  await reporterPool.end();
   const evidenceDirectory = "docs/evidence/local-drill";
   await mkdir(evidenceDirectory, { recursive: true });
   for (const document of (await database.query<{ hash: string; canonical_json: string }>("SELECT hash,canonical_json FROM evidence")).rows) {
@@ -226,6 +256,9 @@ try {
     workerRestarted: true,
     openingReceiptReconciled: true,
     scheduledWorkerCycleVerified: true,
+    scheduledReporterOpeningAndRecoveryVerified: true,
+    scheduledReporterRetriesDidNotDuplicate: true,
+    scheduledReporterFeeReservations: reservations,
     browserVerification,
     note: "Ephemeral local Anvil and isolated PostgreSQL schema. Browser registration is a configuration fixture with the worker stopped; it is not extra telemetry or public testnet execution."
   };

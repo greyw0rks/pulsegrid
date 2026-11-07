@@ -1,0 +1,47 @@
+{
+  "schema": "pulsegrid.bot-drill.v1",
+  "checkedAt": "2026-11-07T16:46:07.453Z",
+  "chainId": 677,
+  "registry": "0x368d564dd8166d1967f21c7fbaaf87883ef85c83",
+  "reporter": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "simulated": true,
+  "endpointId": "0x170d3442a5145571e7e4f1f0e919fd0b0cbf53b26aa053a495979c14a10caa83",
+  "incidentId": "145e6abe-5a87-469d-ada5-d17b252b0799",
+  "chainIncidentId": "1",
+  "openingEvidence": "0xe019843c5778459a02ebdc6ff66d9e9d118083d9e32df3dece174f52b457e1e3",
+  "recoveryEvidence": "0x33056d7a157812a0d2f7dc23009cadf5debac2a5ded5f81045f2850550ed67ab",
+  "openingTransaction": "0xee33697d340e3b5b431effde5f3e714785f829c18016106e461d8b8eff44c482",
+  "recoveryTransaction": "0xc45051c97ba890a9215639c2df7c5cd767908dc3e67c95ddb60270b7f0b0b9fc",
+  "events": [
+    {
+      "transaction_hash": "0xee33697d340e3b5b431effde5f3e714785f829c18016106e461d8b8eff44c482",
+      "event_name": "IncidentOpened",
+      "evidence_hash": "0xe019843c5778459a02ebdc6ff66d9e9d118083d9e32df3dece174f52b457e1e3",
+      "block_number": "29447273"
+    },
+    {
+      "transaction_hash": "0xc45051c97ba890a9215639c2df7c5cd767908dc3e67c95ddb60270b7f0b0b9fc",
+      "event_name": "IncidentResolved",
+      "evidence_hash": "0x33056d7a157812a0d2f7dc23009cadf5debac2a5ded5f81045f2850550ed67ab",
+      "block_number": "29447336"
+    }
+  ],
+  "evidenceDirectory": "docs/evidence/bot-drill",
+  "receipts": [
+    {
+      "transactionHash": "0xee33697d340e3b5b431effde5f3e714785f829c18016106e461d8b8eff44c482",
+      "status": "success",
+      "blockNumber": "29447273",
+      "paidFeeBOT": "0.00413302"
+    },
+    {
+      "transactionHash": "0xc45051c97ba890a9215639c2df7c5cd767908dc3e67c95ddb60270b7f0b0b9fc",
+      "status": "success",
+      "blockNumber": "29447336",
+      "paidFeeBOT": "0.00113364"
+    }
+  ],
+  "execution": "Existing Convex monitor:run and private reporter:run actions",
+  "website": "https://pulsegrid-psi.vercel.app/bot/incidents/145e6abe-5a87-469d-ada5-d17b252b0799",
+  "note": "Controlled simulated timeout and recovery on an isolated endpoint. Transactions and receipts are genuine BOT mainnet executions; this does not represent an official BOT RPC outage."
+}
