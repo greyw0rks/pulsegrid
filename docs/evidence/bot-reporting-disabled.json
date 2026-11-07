@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-11-07T17:04:54.693Z",
+  "deployment": "sincere-hamster-832",
+  "automaticOnChainSubmission": "disabled",
+  "productionSigningKeyRemoved": true,
+  "monitoringContinues": true,
+  "verifiedMonitoringCycle": {
+    "at": "2026-11-07T17:04:53.723Z",
+    "checked": 0,
+    "reporting": {
+      "at": "2026-11-07T17:04:54.693Z",
+      "state": "disabled"
+    },
+    "state": "observing:ready"
+  },
+  "confirmedHistoricalRegistryEvents": 2,
+  "pendingTransactions": 0,
+  "failedTransactions": 0,
+  "note": "Disabled at the user's request. Completed mainnet drill transactions and source evidence remain historical records."
+}

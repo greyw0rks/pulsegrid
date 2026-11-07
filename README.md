@@ -4,7 +4,7 @@ An independent Portaldot RPC monitor with retained observations, verifiable inci
 
 **Live:** https://pulsegrid-psi.vercel.app · **Source:** https://github.com/greyw0rks/pulsegrid
 
-**BOT Chain mainnet:** https://pulsegrid-psi.vercel.app/bot. A separate Convex job monitors the BOT RPC every five minutes and processes incident/recovery attestations with the authorized reporter. Its controlled mainnet opening and recovery demonstration passed; source evidence and receipts are retained. See [BOT deployment](docs/BOT-MAINNET.md) for the contract, limits, and demonstration links. The original Portaldot deployment remains separate.
+**BOT Chain mainnet:** https://pulsegrid-psi.vercel.app/bot. A separate Convex job monitors the BOT RPC every five minutes. Automatic on-chain reporting is currently disabled at the user's request, and its production signing key has been removed. The completed controlled mainnet opening and recovery demonstration, source evidence, and receipts remain available. See [BOT deployment](docs/BOT-MAINNET.md) for the contract and demonstration links. The original Portaldot deployment remains separate.
 
 The hosted MVP uses Neon PostgreSQL and a GitHub Actions monitor scheduled every five minutes. See [hosting](docs/HOSTING.md) for cadence, credentials, and operational limits.
 

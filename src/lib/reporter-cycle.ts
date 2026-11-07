@@ -6,9 +6,9 @@ import { reportingBudgets } from "./reporting-policy";
 
 /** Only the private scheduled reporter calls this; the public web server has no signer. */
 export async function runReporterCycle() {
+  if (process.env.PULSEGRID_REPORTING_ENABLED !== "true") return { state: "disabled", at: new Date().toISOString() };
   const config = runtimeConfig();
   const localTest = config.network === "local" && process.env.NODE_ENV === "test";
-  if (process.env.PULSEGRID_REPORTING_ENABLED !== "true") throw new Error("Automatic reporting is disabled");
   if ((!localTest && config.network !== "bot-mainnet") || !config.registry || !process.env.DATABASE_URL || !process.env.PULSEGRID_PRIVATE_KEY) {
     throw new Error("Reporter configuration is incomplete");
   }
