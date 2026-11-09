@@ -1,0 +1,76 @@
+{
+  "schema": "pulsegrid.bot-review.v1",
+  "checkedAt": "2026-11-09T20:54:56.600Z",
+  "readOnly": true,
+  "website": "https://pulsegrid-psi.vercel.app/bot",
+  "review": "https://pulsegrid-psi.vercel.app/bot/review",
+  "chainId": 677,
+  "currentBlock": "29697664",
+  "registry": "0x368d564dd8166d1967f21c7fbaaf87883ef85c83",
+  "runtimeCodeHash": "0x6ae7d3e9161404577f27141f6eebc9e1a826c259319ce64b851b137e235ef4d9",
+  "reporter": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "chainIncidentCount": "1",
+  "incident": "https://pulsegrid-psi.vercel.app/bot/incidents/145e6abe-5a87-469d-ada5-d17b252b0799",
+  "contractSourceVerified": true,
+  "deploymentVerified": true,
+  "monitorHeartbeat": "2026-11-09T20:53:32.303Z",
+  "originalPortaldotConfirmedEvents": 2,
+  "transactions": [
+    {
+      "action": "openIncident",
+      "transactionHash": "0xee33697d340e3b5b431effde5f3e714785f829c18016106e461d8b8eff44c482",
+      "status": "success",
+      "from": "0xe79bb36b53835f0740bd4a9684f5c84d8fb9b52c",
+      "to": "0x368d564dd8166d1967f21c7fbaaf87883ef85c83",
+      "blockNumber": "29447273",
+      "blockHash": "0x17ed62677e5bf73b4d70ff3635ce589ae3d8e273c419bc16f9ac2ff75f1577e0",
+      "confirmations": "250391",
+      "paidFeeBOT": "0.00413302",
+      "evidenceHash": "0xe019843c5778459a02ebdc6ff66d9e9d118083d9e32df3dece174f52b457e1e3",
+      "canonicalEvidenceVerified": true,
+      "matchingContractStateAndEvent": true,
+      "explorerVerified": true,
+      "explorer": "https://scan.botchain.ai/tx/0xee33697d340e3b5b431effde5f3e714785f829c18016106e461d8b8eff44c482",
+      "classification": "controlled mainnet product drill; independent adoption unproved"
+    },
+    {
+      "action": "resolveIncident",
+      "transactionHash": "0xc45051c97ba890a9215639c2df7c5cd767908dc3e67c95ddb60270b7f0b0b9fc",
+      "status": "success",
+      "from": "0xe79bb36b53835f0740bd4a9684f5c84d8fb9b52c",
+      "to": "0x368d564dd8166d1967f21c7fbaaf87883ef85c83",
+      "blockNumber": "29447336",
+      "blockHash": "0xb4ff40458e71cdeb14342ed8b13731e6cf4ecf12b9990f3f49aa1b8889c95bff",
+      "confirmations": "250328",
+      "paidFeeBOT": "0.00113364",
+      "evidenceHash": "0x33056d7a157812a0d2f7dc23009cadf5debac2a5ded5f81045f2850550ed67ab",
+      "canonicalEvidenceVerified": true,
+      "matchingContractStateAndEvent": true,
+      "explorerVerified": true,
+      "explorer": "https://scan.botchain.ai/tx/0xc45051c97ba890a9215639c2df7c5cd767908dc3e67c95ddb60270b7f0b0b9fc",
+      "classification": "controlled mainnet product drill; independent adoption unproved"
+    }
+  ],
+  "permissions": [
+    {
+      "functionName": "openIncident",
+      "method": "eth_call simulation; no transaction",
+      "syntheticCaller": "0x0000000000000000000000000000000000000000",
+      "error": "UnauthorizedReporter"
+    },
+    {
+      "functionName": "resolveIncident",
+      "method": "eth_call simulation; no transaction",
+      "syntheticCaller": "0x0000000000000000000000000000000000000000",
+      "error": "UnauthorizedReporter"
+    }
+  ],
+  "evidenceRequirement": {
+    "minimumSuccessfulCoreTransactions": 5,
+    "minimumDistinctWallets": 3,
+    "verifiedCoreTransactions": 2,
+    "distinctSenderWallets": 1,
+    "met": false,
+    "blocker": "Immutable single-reporter authorization; independent participants not arranged. Controlled drill evidence is not independent adoption."
+  }
+}

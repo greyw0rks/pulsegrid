@@ -38,7 +38,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="shell footer-inner">
             <span>Independent monitor observations</span>
             <span>On-chain records attest reports, not objective outages</span>
-            {bot ? <span><a href="https://botchain.ai">BOT Chain</a> · <a href="https://scan.botchain.ai">BOTScan</a></span> : null}
+            {bot ? <span><a href="https://botchain.ai">BOT Chain</a> · <a href="https://scan.botchain.ai">BOTScan</a> · <Link href="/review">Review evidence</Link></span> : null}
           </div>
         </footer>
       </body>

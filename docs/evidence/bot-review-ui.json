@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-11-09T21:06:05.084Z",
+  "website": "https://pulsegrid-psi.vercel.app/bot",
+  "review": "https://pulsegrid-psi.vercel.app/bot/review",
+  "readOnly": true,
+  "browser": [
+    {
+      "width": 1280,
+      "landingReviewLink": true,
+      "externalNetworkLinks": true,
+      "twoReceiptLinks": true,
+      "reporterRestrictionVisible": true,
+      "basePathPreserved": true,
+      "incidentNavigation": true,
+      "evidenceDownload": true,
+      "evidenceDigestVerified": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "landingReviewLink": true,
+      "externalNetworkLinks": true,
+      "twoReceiptLinks": true,
+      "reporterRestrictionVisible": true,
+      "basePathPreserved": true,
+      "incidentNavigation": true,
+      "evidenceDownload": true,
+      "evidenceDigestVerified": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "width": 360,
+      "landingReviewLink": true,
+      "externalNetworkLinks": true,
+      "twoReceiptLinks": true,
+      "reporterRestrictionVisible": true,
+      "basePathPreserved": true,
+      "incidentNavigation": true,
+      "evidenceDownload": true,
+      "evidenceDigestVerified": true,
+      "overflow": false,
+      "errors": []
+    }
+  ]
+}

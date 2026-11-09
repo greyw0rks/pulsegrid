@@ -8,6 +8,8 @@ const config: NextConfig = {
   poweredByHeader: false,
   devIndicators: false,
   outputFileTracingIncludes: {
+    '/': ['./docs/evidence/deployment-*.json'],
+    '/review': ['./docs/evidence/deployment-*.json'],
     '/registry': ['./docs/evidence/deployment-*.json'],
     '/api/deployment': ['./docs/evidence/deployment-*.json']
   },

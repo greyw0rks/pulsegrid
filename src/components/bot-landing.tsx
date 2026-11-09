@@ -13,8 +13,8 @@ export async function BotLanding() {
       <div className="landing-copy">
         <div className="landing-eyebrow"><RadioTower size={14} aria-hidden="true" /> BOT CHAIN / RPC MONITORING</div>
         <h1 id="landing-title">Know what failed.<br /><span>Prove what recovered.</span></h1>
-        <p className="landing-lede">Monitor BOT Chain RPC health, retain incident evidence, and follow recovery reports through to confirmed on-chain receipts.</p>
-        <div className="landing-actions"><Link className="button button-primary" href="/dashboard">Open the dashboard <ArrowUpRight size={17} aria-hidden="true" /></Link><Link className="landing-text-link" href="/registry">Inspect the contract <ArrowUpRight size={15} aria-hidden="true" /></Link></div>
+        <p className="landing-lede">Pulsegrid is an independent project monitoring BOT Chain RPC health, retaining incident evidence, and following recovery reports through to confirmed on-chain receipts.</p>
+        <div className="landing-actions"><Link className="button button-primary" href="/dashboard">Open the dashboard <ArrowUpRight size={17} aria-hidden="true" /></Link><Link className="landing-text-link" href="/review">Review the mainnet flow <ArrowUpRight size={15} aria-hidden="true" /></Link></div>
         <p className="landing-caption"><ShieldCheck size={15} aria-hidden="true" /> BOT Chain mainnet · chain ID 677</p>
       </div>
       <div className="signal-board" aria-label="BOT Chain deployment and retained observations">

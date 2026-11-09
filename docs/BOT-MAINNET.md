@@ -1,5 +1,7 @@
 # BOT Chain deployment
 
+Review package: [BOT-REVIEW.md](BOT-REVIEW.md). Live incident/recovery review: https://pulsegrid-psi.vercel.app/bot/review. Launch announcement and five additional unpublished original drafts: [BOT-X-POSTS.md](BOT-X-POSTS.md).
+
 - Website: https://pulsegrid-psi.vercel.app/bot
 - Network: BOT Chain mainnet, chain ID 677
 - Registry: `0x368d564dd8166d1967f21c7fbaaf87883ef85c83`

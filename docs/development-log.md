@@ -1,5 +1,12 @@
 # Development record
 
+## November 9, 2026 — BOT Chain review delivery
+
+- Added `/bot/review` with the independent project description, incident/recovery BOTScan links, canonical source downloads, deployment proof, and exact immutable reporter restriction. Linked it from the BOT landing page and footer; included deployment proof files for the review route.
+- Fresh read-only verification checked chain 677, successful receipt inputs/logs, resolved contract state, source digests, BOTScan records, and verified contract source. Both non-reporter method simulations rejected with `UnauthorizedReporter()`. No transactions were signed or submitted.
+- Prepared a reviewer reply, mainnet launch post, and five additional original X drafts. All drafts remain unpublished. Five core transactions across three wallets remain unmet: two controlled mainnet transactions from one reporter, with no independent participants arranged. Automatic reporting remains disabled as previously requested.
+- TypeScript and changed-source lint passed. Production Vercel build reached READY at `dpl_5kfNuwuw9ZnjP5rsR7fhLx9jfqdD`, served through the existing `/bot` website. Six original post drafts fit X's 280-character limit using its URL weighting. Live chain, browser, and deployment evidence is retained in `docs/evidence/bot-review*.json` and `docs/evidence/bot-review-ui/`.
+
 ## November 7, 2026
 
 - At the user's subsequent request, disabled automatic BOT on-chain submission by setting production `PULSEGRID_REPORTING_ENABLED=false` and removing the private production `PULSEGRID_PRIVATE_KEY`. The reporter now returns `disabled` before loading a signer, connecting to the database or processing queued transactions, allowing monitoring cron cycles to succeed. Five-minute RPC observations, registry indexing, the deployed contract and genuine historical drill receipts/evidence remain available. New evidence can still be retained and queued without publication. Four meaningful disabled-state checks verify no database/signing/queue work and require a signer before re-enabling.

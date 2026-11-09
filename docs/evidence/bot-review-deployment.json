@@ -1,0 +1,16 @@
+{
+  "schema": "pulsegrid.web-deployment.v1",
+  "recordedDate": "2026-11-09",
+  "project": "pulsegrid-bot",
+  "deploymentId": "dpl_5kfNuwuw9ZnjP5rsR7fhLx9jfqdD",
+  "deploymentUrl": "https://pulsegrid-ijm363xbw-greyw0rks-projects.vercel.app",
+  "productionAlias": "https://pulsegrid-bot.vercel.app",
+  "publicWebsite": "https://pulsegrid-psi.vercel.app/bot",
+  "reviewUrl": "https://pulsegrid-psi.vercel.app/bot/review",
+  "target": "production",
+  "readyState": "READY",
+  "source": "Vercel CLI deploy result",
+  "reportingEnabled": false,
+  "reportingStateSource": "Read-only Convex production environment check returned false",
+  "note": "Website review delivery. Contract, reporting authorization, and historical mainnet transactions are unchanged."
+}
