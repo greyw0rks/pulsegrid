@@ -1,5 +1,16 @@
 # Development record
 
+## November 10, 2026 — Participant wallet reporting
+
+- Finished the previously uncommitted wallet-reporting implementation. At the user's request, retained the first two participant wallets and added two more: four participants plus the existing owner. The user confirmed independent participants; their actual participation still requires their own wallet-approved reports.
+- Added owner-managed reporter permissions and reporter-scoped incident lifecycles in `MultiReporterIncidentRegistry`. Only the wallet that opened a report can resolve it; revocation stops new reports while allowing existing recovery. Duplicate source reports and overlapping incidents for one wallet/endpoint are rejected. Original registry history and disabled automatic reporting are preserved.
+- Deployed registry `0xa906ff64af8bfbcd0408d793bfd13bfc2288cd4f` in successful BOT mainnet transaction `0x013780d9e2bc249d46da7f71d5d0c13d3f1f25a8d4ddd89803d574f8294effc9`, block 29809509. Actual deployment fee: 0.015646 BOT. Verified the exact Solidity source on BOTScan and all five owner/participant permissions.
+- At the user's explicit request, sent four 0.025 BOT gas grants. All four receipts succeeded; total grants 0.1 BOT and fees 0.00168 BOT. Funding journals retain the same signed transaction on retry and reconcile receipts instead of sending another grant. Deployment, permission events, and funding are excluded from core-action counts.
+- Released wallet connection, evidence review, zero-value transaction preparation, pending receipt persistence, and opening/recovery receipt verification at https://pulsegrid-psi.vercel.app/bot/reports. Publishing the new route resolved the user's missing-record page. Added mobile navigation wrapping and the requested participant guide.
+- Validation: 51 application/policy checks, 24 Solidity checks including ownership fuzzing, TypeScript, focused ESLint, local production build, and Vercel production build passed. Used the compiler API path for installed TypeScript 5.9 after local CLI output parsing failed. Final production deployment: `dpl_nQzb9sxqRbPeRZZ8FJCBmDnD4VDx` (READY).
+- Public browser checks passed at 1280/390/360px with no runtime errors or overflow. Original incident navigation and both canonical evidence digests passed. Read-only opening preflights passed for all four participants at maximum estimated fee 0.00487436 BOT each. Mock-wallet browser fixtures passed altered-transaction rejection, retained pending hash after reload without resending, and opening/recovery; they did not sign or broadcast real reports.
+- Retained release, funding, contract-source, live-browser, and fixture evidence under `docs/evidence/wallet-*` and `docs/evidence/participant-gas-grants-677.json`. Independent participants must still approve their own reports; published launch/five-original-post URLs remain to be provided and verified. No participant signer was requested or used, and no social post or reviewer reply was sent.
+
 ## November 9, 2026 — BOT Chain review delivery
 
 - Added `/bot/review` with the independent project description, incident/recovery BOTScan links, canonical source downloads, deployment proof, and exact immutable reporter restriction. Linked it from the BOT landing page and footer; included deployment proof files for the review route.

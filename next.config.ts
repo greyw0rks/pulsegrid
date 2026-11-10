@@ -7,9 +7,14 @@ const config: NextConfig = {
   env: { NEXT_PUBLIC_PULSEGRID_BASE_PATH: basePath },
   poweredByHeader: false,
   devIndicators: false,
+  experimental: { useTypeScriptCli: false },
   outputFileTracingIncludes: {
     '/': ['./docs/evidence/deployment-*.json'],
-    '/review': ['./docs/evidence/deployment-*.json'],
+    '/review': ['./docs/evidence/deployment-*.json', './docs/evidence/wallet-registry-deployment-677.json'],
+    '/reports': ['./docs/evidence/wallet-registry-deployment-677.json'],
+    '/api/wallet-reports': ['./docs/evidence/wallet-registry-deployment-677.json'],
+    '/api/wallet-reports/prepare': ['./docs/evidence/wallet-registry-deployment-677.json'],
+    '/api/wallet-reports/receipt': ['./docs/evidence/wallet-registry-deployment-677.json'],
     '/registry': ['./docs/evidence/deployment-*.json'],
     '/api/deployment': ['./docs/evidence/deployment-*.json']
   },

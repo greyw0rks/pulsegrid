@@ -22,7 +22,7 @@ try {
     await expect(page.getByText("Contract verified", { exact: true })).toBeVisible();
     await expect(page.getByText("Confirmed receipt retained", { exact: true })).toHaveCount(2);
     await expect(page.locator("main a[href^='https://scan.botchain.ai/tx/']")).toHaveCount(2);
-    await expect(page.getByText("The requirement for at least five transactions across three distinct wallets remains unmet.", { exact: false })).toBeVisible();
+    await expect(page.getByText("The review requires at least five successful core transactions across three wallets.", { exact: false })).toBeVisible();
     await expect(page.getByRole("link", { name: "Download canonical JSON", exact: true })).toHaveCount(2);
     const jsonHref = await page.getByRole("link", { name: "Download canonical JSON", exact: true }).first().getAttribute("href");
     if (!jsonHref?.startsWith("/bot/api/evidence/")) throw new Error("Evidence URL escaped BOT base path");

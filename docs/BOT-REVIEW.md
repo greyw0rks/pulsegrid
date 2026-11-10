@@ -1,6 +1,6 @@
 # BOT Chain review delivery
 
-Prepared November 9, 2026. The app and completed incident/recovery proof are available now. Full review eligibility remains incomplete because of reporter permissions, missing independent participants, and unpublished or unverified social evidence.
+Updated November 10, 2026. The original incident/recovery proof remains available. An additional registry now supports approved participant wallets, and four owner-confirmed participant wallets have received BOT for gas. Participant core-action receipts and published social evidence still need to be supplied and verified for the full review checklist.
 
 ## Working application and evidence
 
@@ -17,7 +17,10 @@ Prepared November 9, 2026. The app and completed incident/recovery proof are ava
 | Personal X profile | https://x.com/Greyw0rks — used by existing project posts; confirm preferred review profile |
 | Mainnet launch announcement | Draft: [BOT-X-POSTS.md](BOT-X-POSTS.md); publishing and public URL pending |
 | Five original X posts within 30 days | Five additional original drafts prepared; five qualifying published URLs have not been supplied or verified |
-| Five successful core transactions across three wallets | **Unmet:** two verified controlled-drill core transactions, one sender wallet |
+| Participant reporting | https://pulsegrid-psi.vercel.app/bot/reports; [participant guide](BOT-PARTICIPANT-GUIDE.md) |
+| Verified wallet-reporting registry | https://scan.botchain.ai/address/0xa906ff64af8bfbcd0408d793bfd13bfc2288cd4f?tab=contract |
+| Four participant gas grants | 0.025 BOT each; [successful transfer receipts](evidence/participant-gas-grants-677.json); excluded from core-action counts |
+| Five successful core transactions across three wallets | **Unmet pending participant reports:** two verified controlled-drill core transactions, one sender wallet |
 
 Both product receipts succeeded. The transaction inputs, events, contract state, BOTScan records, and canonical evidence hashes match. These are controlled execution evidence. The simulated failure does not establish an actual BOT RPC outage or independent adoption. Deployment transactions are excluded from the core-product count.
 
@@ -33,7 +36,7 @@ The deployed registry's `authorizedReporter` is the immutable address `0xE79bB36
 
 Automatic on-chain reporting remains disabled at the owner's request. Five-minute RPC observations and receipt indexing continue. No additional reports were generated for this review.
 
-Independent participants have not yet been arranged. Reporter permissions must first be resolved through a supported participation path or a reviewer-approved evidence exception. A new registry supporting independent reporters would be a separate product change and deployment. Builder-controlled wallets must not be presented as independent adoption.
+On November 10, the owner confirmed participant wallets and requested a total of four participant addresses. A separately deployed registry now allows those approved wallets to attest the retained source evidence and resolve only their own reports. Exact Solidity source, deployment, owner, runtime code hash, and reporter permissions were verified. User-authorized gas grants succeeded for all four wallets. Those grants do not establish actual product usage, and the participants must approve their own reports; on-chain records alone cannot verify their independence.
 
 ## Reviewer reply ready to send
 
@@ -47,8 +50,8 @@ Recovery: https://scan.botchain.ai/tx/0xc45051c97ba890a9215639c2df7c5cd767908dc3
 
 Both receipts succeeded and match the retained evidence. These are labelled controlled mainnet drill transactions. The website links to BOT Chain and BOTScan and includes Pulsegrid's independent project description.
 
-Reporter permissions do block the three-wallet requirement: the registry has one immutable authorized reporter, so other wallets cannot submit these attestations. Current evidence is two successful core transactions from one wallet. Could you confirm a supported participation path or whether you accept an exception for this reporter model?
+The original registry has one immutable reporter. We added a verified wallet-reporting registry so approved participants can review the retained evidence and submit their own incident and recovery attestations. Four participant wallets confirmed by the owner have received BOT for gas. Current verified core-action evidence remains the original two transactions from one wallet until participant reports are confirmed; deployment and gas-grant transactions are excluded.
 
-The launch announcement is prepared. I'll send its published URL and five qualifying original-post links once available. Technical delivery is ready now; the remaining evidence timeline depends on resolving reporter access and arranging independent participants, so I cannot yet give a reliable completion date for the full review checklist.
+The launch announcement is prepared. I'll send its published URL, five qualifying original-post links, and participant receipt URLs once available. Technical delivery is ready; completion of the full review checklist depends on participants approving their own attestations and the published social evidence being verified.
 
 This reply has not been sent, and no social posts have been published from this session.

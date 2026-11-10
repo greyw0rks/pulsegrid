@@ -23,6 +23,10 @@ Public incident: https://pulsegrid-psi.vercel.app/bot/incidents/145e6abe-5a87-46
 
 Run `node .local/run.mjs .local/worker.env node --import tsx scripts/bot-drill.ts` for a read-only drill preflight, adding `--submit` only for an authorized execution. The script retains one completed drill per registry and resumes its existing incident after interruption. Evidence is in `docs/evidence/bot-drill-*.json` and `docs/evidence/bot-drill/`.
 
-The registry keeps its existing immutable single-reporter authorization. No additional wallet-count features were introduced. Successful deployment does not imply observed incidents, recovery attestations, or independent adoption. Genuine reports appear when their respective evidence and successful transactions exist.
+The original registry keeps its immutable single-reporter authorization. An additional `MultiReporterIncidentRegistry` was deployed November 10 at `0xa906ff64af8bfbcd0408d793bfd13bfc2288cd4f`, with exact Solidity source verified on BOTScan. Its owner can approve or revoke reporters; each wallet opens and resolves its own reports. Revocation prevents new reports while allowing a reporter to resolve its existing reports. Four participant wallets supplied and confirmed by the owner are approved, alongside the existing owner wallet.
+
+Participant instructions: [BOT-PARTICIPANT-GUIDE.md](BOT-PARTICIPANT-GUIDE.md). Reporting page: https://pulsegrid-psi.vercel.app/bot/reports. Each participant reviews retained source evidence and approves its own zero-value transaction plus gas. Historical drill evidence preserves the original monitor and observation times. A wallet attestation does not represent a fresh outage or another monitor's observations.
+
+At the user's request, all four participant wallets received 0.025 BOT each for gas, with four successful transfer receipts retained in `docs/evidence/participant-gas-grants-677.json`. Total grants: 0.1 BOT; transfer fees: 0.00168 BOT. Deployment fee: 0.015646 BOT. Deployment and gas transfers are excluded from core-product counts. No participant reports have been signed on behalf of those wallets.
 
 Deployment, source verification, live checks, and browser captures are retained in `docs/evidence/bot-mainnet-*.json`, `docs/evidence/deployment-677-*.json`, and `docs/evidence/bot-ui/`.

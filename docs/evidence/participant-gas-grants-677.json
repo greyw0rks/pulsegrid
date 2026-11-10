@@ -1,0 +1,46 @@
+{
+  "schema": "pulsegrid.participant-gas-grants.v1",
+  "chainId": 677,
+  "owner": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "targetBOT": "0.025",
+  "grants": [
+    {
+      "recipient": "0xBA46d08B9E298E8E70096Fc238Da207139BCCAB7",
+      "amountBOT": "0.025",
+      "balanceBeforeBOT": "0",
+      "balanceAfterBOT": "0.025",
+      "transactionHash": "0x9ef644bfacc6c6879594bcaf41f99bc5c802627e20862e9a7653cc24d40ff5ed",
+      "blockNumber": "29809374",
+      "paidFeeBOT": "0.00042"
+    },
+    {
+      "recipient": "0xB9e3A2D811729C11F64313F59922Ab37Afa52010",
+      "amountBOT": "0.025",
+      "balanceBeforeBOT": "0",
+      "balanceAfterBOT": "0.025",
+      "transactionHash": "0x43aef9a35569c0e244a77e1233b07be3d7c2672ac7ebd9c48d30506bb26efd3f",
+      "blockNumber": "29809379",
+      "paidFeeBOT": "0.00042"
+    },
+    {
+      "recipient": "0x0A4Da2520B480A6422aF61c889f16233DFB256B2",
+      "amountBOT": "0.025",
+      "balanceBeforeBOT": "0",
+      "balanceAfterBOT": "0.025",
+      "transactionHash": "0xde9896c23c6118b5271d4821d69efb08323d4ebdbfcba0a6a46f0c9969cdb9df",
+      "blockNumber": "29809386",
+      "paidFeeBOT": "0.00042"
+    },
+    {
+      "recipient": "0xc61Bbc0CF5694EF410A578A9833f77C173790450",
+      "amountBOT": "0.025",
+      "balanceBeforeBOT": "0",
+      "balanceAfterBOT": "0.025",
+      "transactionHash": "0x667e5956a945b91a7d984758f0aa0392f5995650623d3dc9900278bcb16638fd",
+      "blockNumber": "29809393",
+      "paidFeeBOT": "0.00042"
+    }
+  ],
+  "checkedAt": "2026-11-10T20:11:28.446Z",
+  "note": "User-authorized BOT mainnet gas grants to four user-confirmed participant wallets. Funding transfers do not count as core-product transactions or prove independent usage."
+}

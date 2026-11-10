@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-10T20:21:01.593Z",
+  "base": "https://pulsegrid-psi.vercel.app/bot",
+  "fixture": true,
+  "note": "Mock wallet and API: no signing, broadcasts, or independent-user adoption.",
+  "findings": [
+    {
+      "width": 1280,
+      "malformedTransactionRejected": true,
+      "pendingReloadNoResend": true,
+      "ownOpeningAndRecovery": true,
+      "exactlyTwoWalletRequests": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "malformedTransactionRejected": true,
+      "pendingReloadNoResend": true,
+      "ownOpeningAndRecovery": true,
+      "exactlyTwoWalletRequests": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "width": 360,
+      "malformedTransactionRejected": true,
+      "pendingReloadNoResend": true,
+      "ownOpeningAndRecovery": true,
+      "exactlyTwoWalletRequests": true,
+      "overflow": false,
+      "errors": []
+    }
+  ]
+}

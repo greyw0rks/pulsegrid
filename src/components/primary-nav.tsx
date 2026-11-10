@@ -7,7 +7,7 @@ import { Activity, ExternalLink } from "lucide-react";
 export function PrimaryNav({ externalHref = "https://node-console.portaldot.dev/", externalLabel = "Node console" }: { externalHref?: string; externalLabel?: string }) {
   const pathname = usePathname();
   return <nav className="primary-nav" aria-label="Primary navigation">
-    {[{ href: "/dashboard", label: "Dashboard" }, { href: "/registry", label: "Registry" }, { href: "/operator", label: "Operator" }].map(item =>
+    {[{ href: "/dashboard", label: "Dashboard" }, { href: "/registry", label: "Registry" }, { href: "/operator", label: "Operator" }, ...(externalLabel === "BOTScan" ? [{ href: "/reports", label: "Report" }] : [])].map(item =>
       <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined}>
         {item.href === "/dashboard" ? <Activity aria-hidden="true" size={15} /> : null}{item.label}
       </Link>)}

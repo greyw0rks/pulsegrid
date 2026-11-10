@@ -1,0 +1,9 @@
+{
+  "checkedAt": "2026-11-10T20:14:55.636Z",
+  "chainId": 677,
+  "registry": "0xa906ff64af8bfbcd0408d793bfd13bfc2288cd4f",
+  "sourceVerified": true,
+  "exactSourceMatch": true,
+  "explorer": "https://scan.botchain.ai/address/0xa906ff64af8bfbcd0408d793bfd13bfc2288cd4f?tab=contract",
+  "sourcePath": "contracts/src/MultiReporterIncidentRegistry.sol"
+}

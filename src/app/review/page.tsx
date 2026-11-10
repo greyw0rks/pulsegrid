@@ -8,6 +8,7 @@ import { runtimeConfig } from "@/lib/env";
 import { getRegistryEvents } from "@/lib/queries";
 import { appPath } from "@/lib/paths";
 import { shortHash } from "@/lib/format";
+import { getWalletReportOverview } from "@/lib/wallet-reports";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -18,8 +19,8 @@ export const metadata: Metadata = {
 
 export default async function ReviewPage() {
   if (runtimeConfig().network !== "bot-mainnet") notFound();
-  const [proof, events] = await Promise.all([
-    getDeploymentProof(), getRegistryEvents().catch(() => [])
+  const [proof, events, walletReports] = await Promise.all([
+    getDeploymentProof(), getRegistryEvents().catch(() => []), getWalletReportOverview()
   ]);
   const transitions = [
     { name: "Incident attestation", method: "openIncident", hash: drill.openingTransaction, evidence: drill.openingEvidence, event: "IncidentOpened" },
@@ -65,7 +66,10 @@ export default async function ReviewPage() {
     <section className="section" aria-labelledby="permissions-heading">
       <div className="section-head"><h2 id="permissions-heading">Reporter permissions and review requirement</h2></div>
       <p>Both <code>openIncident</code> and <code>resolveIncident</code> require the single immutable <code>authorizedReporter</code> above. Calls from other wallets revert with <code>UnauthorizedReporter()</code>. This deployed contract has no function to add or change reporters.</p>
-      <p>The evidence listed here contains two successful core-product transactions from one reporter wallet. The requirement for at least five transactions across three distinct wallets remains unmet. Reporter permissions block additional wallets from submitting these actions, and independent participants have not yet been arranged.</p>
+      <p>The original drill contains two successful core-product transactions from one reporter wallet. A separate wallet-reporting registry lets approved participants attest the retained evidence from their own wallets and resolve only their own reports.</p>
+      <p>{walletReports.state === "ready" ? `The wallet-reporting registry is verified at ${walletReports.registry}.` : "The wallet-reporting registry is being prepared; participant reporting is not yet available."} Approval or gas funding alone does not establish participant usage.</p>
+      <p>{walletReports.eventsAvailable ? `${walletReports.events.length} additional core transactions from ${new Set(walletReports.events.map(event => event.reporter.toLowerCase())).size} wallets have been verified${walletReports.completeEventHistory ? "." : " in the recent explorer page; earlier transactions may exist."}` : "Additional participant receipt links are not currently available for verification."} The review requires at least five successful core transactions across three wallets. Deployments and gas grants are excluded.</p>
+      <p><Link className="button button-primary" href="/reports">Report with your wallet</Link></p>
       <p>RPC monitoring continues every five minutes. The owner has disabled automatic on-chain submissions; the completed drill receipts and evidence remain available.</p>
       <p><a href="https://pulsegrid-psi.vercel.app">Existing Portaldot application</a> · <Link href="/dashboard">BOT Chain dashboard</Link></p>
     </section>

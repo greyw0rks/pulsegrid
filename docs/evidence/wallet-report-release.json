@@ -1,0 +1,23 @@
+{
+  "schema": "pulsegrid.wallet-report-release.v1",
+  "date": "2026-11-10",
+  "website": "https://pulsegrid-psi.vercel.app/bot/reports",
+  "deploymentId": "dpl_nQzb9sxqRbPeRZZ8FJCBmDnD4VDx",
+  "readyState": "READY",
+  "registry": "0xa906ff64af8bfbcd0408d793bfd13bfc2288cd4f",
+  "participantCount": 4,
+  "ownerAndParticipantPermissions": 5,
+  "gasGrantBOTPerParticipant": "0.025",
+  "totalGasGrantsBOT": "0.1",
+  "totalTransferFeesBOT": "0.00168",
+  "registryDeploymentFeeBOT": "0.015646",
+  "automaticReportingEnabled": false,
+  "evidence": {
+    "deployment": "wallet-registry-deployment-677.json",
+    "sourceVerification": "wallet-registry-source-verification.json",
+    "funding": "participant-gas-grants-677.json",
+    "liveBrowserAndUnsignedPreflights": "wallet-report-live.json",
+    "mockWalletBrowserFixtures": "wallet-report-browser-fixtures.json"
+  },
+  "note": "Participants approve their own incident and recovery attestations. Deployments, permissions, and gas grants are excluded from core-action counts. Independent use still requires participant action receipts."
+}
