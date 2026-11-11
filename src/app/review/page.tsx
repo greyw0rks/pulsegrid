@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import drill from "../../../docs/evidence/bot-drill-0x368d564dd8166d1967f21c7fbaaf87883ef85c83.json";
+import social from "../../../docs/evidence/bot-social-2026-11-11.json";
 import { StatusBadge } from "@/components/status-badge";
 import { getDeploymentProof } from "@/lib/deployment";
 import { runtimeConfig } from "@/lib/env";
@@ -26,6 +27,11 @@ export default async function ReviewPage() {
     { name: "Incident attestation", method: "openIncident", hash: drill.openingTransaction, evidence: drill.openingEvidence, event: "IncidentOpened" },
     { name: "Recovery attestation", method: "resolveIncident", hash: drill.recoveryTransaction, evidence: drill.recoveryEvidence, event: "IncidentResolved" }
   ];
+  const originalCoreEvents = proof.state === "verified" ? events.filter(event => transitions.some(transition =>
+    event.transactionHash === transition.hash && event.eventName === transition.event && event.evidenceHash === transition.evidence)) : [];
+  const coreTransactions = new Map([...originalCoreEvents, ...walletReports.events].map(event => [event.transactionHash.toLowerCase(), event.reporter.toLowerCase()]));
+  const coreWalletCount = new Set(coreTransactions.values()).size;
+  const coreRequirementMet = coreTransactions.size >= 5 && coreWalletCount >= 3;
   return <div className="page shell">
     <header className="page-head"><div>
       <h1>Pulsegrid on BOT Chain</h1>
@@ -59,7 +65,7 @@ export default async function ReviewPage() {
           <div><dt>Verified contract source</dt><dd className="mono"><a href={`https://scan.botchain.ai/address/${drill.registry}?tab=contract`}>{drill.registry}</a></dd></div>
           <div><dt>Authorized reporter</dt><dd className="mono"><a href={`https://scan.botchain.ai/address/${drill.reporter}`}>{drill.reporter}</a></dd></div>
         </dl>
-        <p><Link href="/registry">Inspect the live registry</Link> · <a href={appPath("/api/deployment")}>Download deployment proof</a> · <a href="https://github.com/greyw0rks/pulsegrid">Project source</a></p>
+        <p><Link href="/registry">Inspect the live registry</Link> · <a href={appPath("/api/deployment")}>Download deployment proof</a> · <a href="https://github.com/greyw0rks/pulsegrid/tree/deploy/bot-mainnet-20261107">Project source</a></p>
       </div>
     </section>
 
@@ -67,11 +73,18 @@ export default async function ReviewPage() {
       <div className="section-head"><h2 id="permissions-heading">Reporter permissions and review requirement</h2></div>
       <p>Both <code>openIncident</code> and <code>resolveIncident</code> require the single immutable <code>authorizedReporter</code> above. Calls from other wallets revert with <code>UnauthorizedReporter()</code>. This deployed contract has no function to add or change reporters.</p>
       <p>The original drill contains two successful core-product transactions from one reporter wallet. A separate wallet-reporting registry lets approved participants attest the retained evidence from their own wallets and resolve only their own reports.</p>
-      <p>{walletReports.state === "ready" ? `The wallet-reporting registry is verified at ${walletReports.registry}.` : "The wallet-reporting registry is being prepared; participant reporting is not yet available."} Approval or gas funding alone does not establish participant usage.</p>
+      <p>{walletReports.state === "ready" && walletReports.registry ? <>The wallet-reporting registry is verified at <a className="mono" href={`https://scan.botchain.ai/address/${walletReports.registry}?tab=contract`} title={walletReports.registry}>{shortHash(walletReports.registry)}</a>.</> : "The wallet-reporting registry is being prepared; participant reporting is not yet available."} Approval or gas funding alone does not establish participant usage.</p>
       <p>{walletReports.eventsAvailable ? `${walletReports.events.length} additional core transactions from ${new Set(walletReports.events.map(event => event.reporter.toLowerCase())).size} wallets have been verified${walletReports.completeEventHistory ? "." : " in the recent explorer page; earlier transactions may exist."}` : "Additional participant receipt links are not currently available for verification."} The review requires at least five successful core transactions across three wallets. Deployments and gas grants are excluded.</p>
+      <p><StatusBadge status={coreRequirementMet ? "confirmed" : "pending"} label={coreRequirementMet ? "Transaction requirement met" : "More core receipts required"} /> {coreTransactions.size} successful core transactions across {coreWalletCount} wallets are currently verified, including the original drill. Participant attestations review the retained drill evidence; they do not represent new outages or independent monitoring.</p>
       <p><Link className="button button-primary" href="/reports">Report with your wallet</Link></p>
       <p>RPC monitoring continues every five minutes. The owner has disabled automatic on-chain submissions; the completed drill receipts and evidence remain available.</p>
       <p><a href="https://pulsegrid-psi.vercel.app">Existing Portaldot application</a> · <Link href="/dashboard">BOT Chain dashboard</Link></p>
+    </section>
+    <section className="section" aria-labelledby="social-heading">
+      <div className="section-head"><h2 id="social-heading">Launch and profile activity</h2></div>
+      <p><a href={social.launchAnnouncement ?? social.profile}>Read the Pulsegrid BOT launch announcement</a> · <a href={social.profile}>Greyw0rks on X</a></p>
+      <p>Five original posts from this personal profile were verified within the preceding 30 days on November 11, 2026. The launch links the BOT mainnet application; the other posts cover the builder&apos;s projects and work.</p>
+      <ul>{social.posts.map(post => <li key={post.id}><a href={post.url}>{post.createdAt.slice(0, 10)} · {post.pulsegridBotMainnetAnnouncement ? "Pulsegrid BOT launch" : "Original profile post"}</a></li>)}</ul>
     </section>
   </div>;
 }

@@ -1,0 +1,175 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 3,
+  "lang": "en",
+  "possibly_sensitive": false,
+  "created_at": "2026-11-02T18:31:33.000Z",
+  "display_text_range": [
+    0,
+    269
+  ],
+  "entities": {
+    "hashtags": [
+      {
+        "indices": [
+          255,
+          269
+        ],
+        "text": "NEARHackathon"
+      }
+    ],
+    "media": [
+      {
+        "display_url": "pic.x.com/7lazOqdojZ",
+        "expanded_url": "https://x.com/Greyw0rks/status/2117323746600161676/video/1",
+        "indices": [
+          270,
+          293
+        ],
+        "url": "https://t.co/7lazOqdojZ"
+      }
+    ],
+    "user_mentions": [
+      {
+        "id_str": "1031949518609121280",
+        "indices": [
+          241,
+          254
+        ],
+        "name": "NEAR Protocol",
+        "screen_name": "NEARProtocol"
+      }
+    ]
+  },
+  "id_str": "2117323746600161676",
+  "text": "What if holding a memecoin could mean more than waiting for the chart to pump?\n\nMeet Greed Machine.\n\nA memecoin powered by AI agents that analyse DeFi opportunities, manage treasury strategies and aim to generate profits for the community.\n\n@NEARProtocol #NEARHackathon https://t.co/7lazOqdojZ",
+  "user": {
+    "id_str": "992758913144709120",
+    "name": "Grey",
+    "screen_name": "Greyw0rks",
+    "is_blue_verified": false,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/2012170442220670976/C4ad8hrP_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2117323746600161676"
+    ],
+    "editable_until_msecs": "1793647893000",
+    "edits_remaining": "5",
+    "is_edit_eligible": false
+  },
+  "mediaDetails": [
+    {
+      "additional_media_info": {},
+      "display_url": "pic.x.com/7lazOqdojZ",
+      "expanded_url": "https://x.com/Greyw0rks/status/2117323746600161676/video/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        270,
+        293
+      ],
+      "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/2117323645760495616/img/1uPgkkiRgvX_jQ8P.jpg",
+      "original_info": {
+        "focus_rects": [],
+        "height": 1080,
+        "width": 1920
+      },
+      "sizes": {
+        "large": {
+          "h": 1080,
+          "resize": "fit",
+          "w": 1920
+        },
+        "medium": {
+          "h": 675,
+          "resize": "fit",
+          "w": 1200
+        },
+        "small": {
+          "h": 383,
+          "resize": "fit",
+          "w": 680
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "video",
+      "url": "https://t.co/7lazOqdojZ",
+      "video_info": {
+        "aspect_ratio": [
+          16,
+          9
+        ],
+        "duration_millis": 36000,
+        "variants": [
+          {
+            "content_type": "application/x-mpegURL",
+            "url": "https://video.twimg.com/amplify_video/2117323645760495616/pl/YgXKgvK41rJFNqgY.m3u8?tag=14"
+          },
+          {
+            "bitrate": 288000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2117323645760495616/vid/avc1/480x270/vxrFE3NZMdquANDi.mp4?tag=14"
+          },
+          {
+            "bitrate": 832000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2117323645760495616/vid/avc1/640x360/-o2_H73axo7sC45I.mp4?tag=14"
+          },
+          {
+            "bitrate": 2176000,
+            "content_type": "video/mp4",
+            "url": "https://video.twimg.com/amplify_video/2117323645760495616/vid/avc1/1280x720/PbUzJraC0ErSy9yK.mp4?tag=14"
+          }
+        ]
+      }
+    }
+  ],
+  "photos": [],
+  "video": {
+    "aspectRatio": [
+      16,
+      9
+    ],
+    "contentType": "media_entity",
+    "durationMs": 36000,
+    "mediaAvailability": {
+      "status": "available"
+    },
+    "poster": "https://pbs.twimg.com/amplify_video_thumb/2117323645760495616/img/1uPgkkiRgvX_jQ8P.jpg",
+    "variants": [
+      {
+        "type": "application/x-mpegURL",
+        "src": "https://video.twimg.com/amplify_video/2117323645760495616/pl/YgXKgvK41rJFNqgY.m3u8?tag=14"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2117323645760495616/vid/avc1/480x270/vxrFE3NZMdquANDi.mp4?tag=14"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2117323645760495616/vid/avc1/640x360/-o2_H73axo7sC45I.mp4?tag=14"
+      },
+      {
+        "type": "video/mp4",
+        "src": "https://video.twimg.com/amplify_video/2117323645760495616/vid/avc1/1280x720/PbUzJraC0ErSy9yK.mp4?tag=14"
+      }
+    ],
+    "videoId": {
+      "type": "tweet",
+      "id": "2117323746600161676"
+    },
+    "viewCount": 0
+  },
+  "conversation_count": 1,
+  "news_action_type": "conversation",
+  "isEdited": false,
+  "isStaleEdit": false
+}

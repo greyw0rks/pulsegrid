@@ -1,11 +1,14 @@
 {
-  "checkedAt": "2026-11-10T20:21:01.593Z",
+  "checkedAt": "2026-11-11T11:45:11.040Z",
   "base": "https://pulsegrid-psi.vercel.app/bot",
   "fixture": true,
   "note": "Mock wallet and API: no signing, broadcasts, or independent-user adoption.",
   "findings": [
     {
       "width": 1280,
+      "chosenWallet": "MetaMask",
+      "eip6963ExplicitProvider": true,
+      "delayedBotChainEventKeepsConnection": true,
       "malformedTransactionRejected": true,
       "pendingReloadNoResend": true,
       "ownOpeningAndRecovery": true,
@@ -15,6 +18,9 @@
     },
     {
       "width": 390,
+      "chosenWallet": "Rabby",
+      "eip6963ExplicitProvider": true,
+      "delayedBotChainEventKeepsConnection": true,
       "malformedTransactionRejected": true,
       "pendingReloadNoResend": true,
       "ownOpeningAndRecovery": true,
@@ -24,6 +30,9 @@
     },
     {
       "width": 360,
+      "chosenWallet": "Rabby",
+      "eip6963ExplicitProvider": true,
+      "delayedBotChainEventKeepsConnection": true,
       "malformedTransactionRejected": true,
       "pendingReloadNoResend": true,
       "ownOpeningAndRecovery": true,

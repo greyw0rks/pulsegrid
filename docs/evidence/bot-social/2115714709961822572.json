@@ -1,0 +1,425 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 9,
+  "lang": "en",
+  "possibly_sensitive": false,
+  "created_at": "2026-10-29T07:57:49.000Z",
+  "display_text_range": [
+    0,
+    280
+  ],
+  "entities": {
+    "media": [
+      {
+        "display_url": "pic.x.com/7AouHd3ONQ",
+        "expanded_url": "https://x.com/Greyw0rks/status/2115714709961822572/photo/1",
+        "indices": [
+          280,
+          303
+        ],
+        "url": "https://t.co/7AouHd3ONQ"
+      }
+    ],
+    "user_mentions": [
+      {
+        "id_str": "1983154960004231168",
+        "indices": [
+          74,
+          84
+        ],
+        "name": "Greylabs",
+        "screen_name": "grey_labs"
+      },
+      {
+        "id_str": "1303778730817523712",
+        "indices": [
+          134,
+          143
+        ],
+        "name": "Tatum",
+        "screen_name": "tatum_io"
+      },
+      {
+        "id_str": "1803816329553850368",
+        "indices": [
+          146,
+          161
+        ],
+        "name": "Walrus",
+        "screen_name": "WalrusProtocol"
+      }
+    ]
+  },
+  "id_str": "2115714709961822572",
+  "text": "When building for a hackathon, build something you most likely will use.\n\n@grey_labs built Atlas, a memory layer for ai agent for the @tatum_io x @WalrusProtocol hackathon, and I use it everytime, everyday, infact I've no choice, whenever I start a session it starts up with me 😀 https://t.co/7AouHd3ONQ",
+  "user": {
+    "id_str": "992758913144709120",
+    "name": "Grey",
+    "screen_name": "Greyw0rks",
+    "is_blue_verified": false,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/2012170442220670976/C4ad8hrP_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2115714709961822572"
+    ],
+    "editable_until_msecs": "1793264269000",
+    "edits_remaining": "5",
+    "is_edit_eligible": true
+  },
+  "mediaDetails": [
+    {
+      "display_url": "pic.x.com/7AouHd3ONQ",
+      "expanded_url": "https://x.com/Greyw0rks/status/2115714709961822572/photo/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        280,
+        303
+      ],
+      "media_url_https": "https://pbs.twimg.com/media/HVyHTPFXIAAersQ.jpg",
+      "original_info": {
+        "focus_rects": [
+          {
+            "h": 307,
+            "w": 548,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 307,
+            "w": 307,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 307,
+            "w": 269,
+            "x": 2,
+            "y": 0
+          },
+          {
+            "h": 307,
+            "w": 154,
+            "x": 59,
+            "y": 0
+          },
+          {
+            "h": 307,
+            "w": 1094,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "height": 307,
+        "width": 1094
+      },
+      "sizes": {
+        "large": {
+          "h": 307,
+          "resize": "fit",
+          "w": 1094
+        },
+        "medium": {
+          "h": 307,
+          "resize": "fit",
+          "w": 1094
+        },
+        "small": {
+          "h": 191,
+          "resize": "fit",
+          "w": 680
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "photo",
+      "url": "https://t.co/7AouHd3ONQ"
+    },
+    {
+      "display_url": "pic.x.com/7AouHd3ONQ",
+      "expanded_url": "https://x.com/Greyw0rks/status/2115714709961822572/photo/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        280,
+        303
+      ],
+      "media_url_https": "https://pbs.twimg.com/media/HVyHTnTWMAAx9VQ.jpg",
+      "original_info": {
+        "focus_rects": [
+          {
+            "h": 257,
+            "w": 459,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 257,
+            "w": 257,
+            "x": 10,
+            "y": 0
+          },
+          {
+            "h": 257,
+            "w": 225,
+            "x": 26,
+            "y": 0
+          },
+          {
+            "h": 257,
+            "w": 129,
+            "x": 74,
+            "y": 0
+          },
+          {
+            "h": 257,
+            "w": 1115,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "height": 257,
+        "width": 1115
+      },
+      "sizes": {
+        "large": {
+          "h": 257,
+          "resize": "fit",
+          "w": 1115
+        },
+        "medium": {
+          "h": 257,
+          "resize": "fit",
+          "w": 1115
+        },
+        "small": {
+          "h": 157,
+          "resize": "fit",
+          "w": 680
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "photo",
+      "url": "https://t.co/7AouHd3ONQ"
+    },
+    {
+      "display_url": "pic.x.com/7AouHd3ONQ",
+      "expanded_url": "https://x.com/Greyw0rks/status/2115714709961822572/photo/1",
+      "ext_media_availability": {
+        "status": "Available"
+      },
+      "indices": [
+        280,
+        303
+      ],
+      "media_url_https": "https://pbs.twimg.com/media/HVyHUCkXgAADio-.jpg",
+      "original_info": {
+        "focus_rects": [
+          {
+            "h": 460,
+            "w": 821,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 460,
+            "w": 460,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 460,
+            "w": 404,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "h": 460,
+            "w": 230,
+            "x": 23,
+            "y": 0
+          },
+          {
+            "h": 460,
+            "w": 1108,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "height": 460,
+        "width": 1108
+      },
+      "sizes": {
+        "large": {
+          "h": 460,
+          "resize": "fit",
+          "w": 1108
+        },
+        "medium": {
+          "h": 460,
+          "resize": "fit",
+          "w": 1108
+        },
+        "small": {
+          "h": 282,
+          "resize": "fit",
+          "w": 680
+        },
+        "thumb": {
+          "h": 150,
+          "resize": "crop",
+          "w": 150
+        }
+      },
+      "type": "photo",
+      "url": "https://t.co/7AouHd3ONQ"
+    }
+  ],
+  "photos": [
+    {
+      "backgroundColor": {
+        "red": 204,
+        "green": 214,
+        "blue": 221
+      },
+      "cropCandidates": [
+        {
+          "h": 307,
+          "w": 548,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 307,
+          "w": 307,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 307,
+          "w": 269,
+          "x": 2,
+          "y": 0
+        },
+        {
+          "h": 307,
+          "w": 154,
+          "x": 59,
+          "y": 0
+        },
+        {
+          "h": 307,
+          "w": 1094,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "expandedUrl": "https://x.com/Greyw0rks/status/2115714709961822572/photo/1",
+      "url": "https://pbs.twimg.com/media/HVyHTPFXIAAersQ.jpg",
+      "width": 1094,
+      "height": 307
+    },
+    {
+      "backgroundColor": {
+        "red": 204,
+        "green": 214,
+        "blue": 221
+      },
+      "cropCandidates": [
+        {
+          "h": 257,
+          "w": 459,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 257,
+          "w": 257,
+          "x": 10,
+          "y": 0
+        },
+        {
+          "h": 257,
+          "w": 225,
+          "x": 26,
+          "y": 0
+        },
+        {
+          "h": 257,
+          "w": 129,
+          "x": 74,
+          "y": 0
+        },
+        {
+          "h": 257,
+          "w": 1115,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "expandedUrl": "https://x.com/Greyw0rks/status/2115714709961822572/photo/1",
+      "url": "https://pbs.twimg.com/media/HVyHTnTWMAAx9VQ.jpg",
+      "width": 1115,
+      "height": 257
+    },
+    {
+      "backgroundColor": {
+        "red": 204,
+        "green": 214,
+        "blue": 221
+      },
+      "cropCandidates": [
+        {
+          "h": 460,
+          "w": 821,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 460,
+          "w": 460,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 460,
+          "w": 404,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 460,
+          "w": 230,
+          "x": 23,
+          "y": 0
+        },
+        {
+          "h": 460,
+          "w": 1108,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "expandedUrl": "https://x.com/Greyw0rks/status/2115714709961822572/photo/1",
+      "url": "https://pbs.twimg.com/media/HVyHUCkXgAADio-.jpg",
+      "width": 1108,
+      "height": 460
+    }
+  ],
+  "conversation_count": 4,
+  "news_action_type": "conversation",
+  "isEdited": false,
+  "isStaleEdit": false
+}

@@ -3,6 +3,8 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { BaseError, ContractFunctionRevertedError, createPublicClient, decodeFunctionData, defineChain, formatEther, http, keccak256, parseAbi, parseEventLogs, stringToHex, zeroAddress, type Hex } from "viem";
 import { registryAbi } from "../src/lib/registry";
 import { canonicalize, evidenceSchema } from "../src/lib/evidence";
+import { walletRegistryAbi } from "../src/lib/wallet-registry-abi";
+import type { WalletReportOverview } from "../src/lib/wallet-report-types";
 
 // Read-only: no wallet client, private key access, signing, or database mutations.
 const base = "https://pulsegrid-psi.vercel.app";
@@ -123,13 +125,93 @@ assert(sourceResponse.source_code.includes("address public immutable authorizedR
 assert(sourceResponse.source_code.includes("external onlyReporter"));
 assert.equal(sourceResponse.source_code.trim(), (await readFile("contracts/src/IncidentRegistry.sol", "utf8")).trim());
 
+const walletOverview = await json(base + "/bot/api/wallet-reports") as WalletReportOverview;
+assert.equal(walletOverview.state, "ready");
+assert(walletOverview.registry && walletOverview.eventsAvailable);
+const walletDeployment = JSON.parse(await readFile("docs/evidence/wallet-registry-deployment-677.json", "utf8"));
+assert.equal(walletOverview.registry.toLowerCase(), walletDeployment.registry.toLowerCase());
+const walletCode = await client.getCode({ address: walletOverview.registry as Hex });
+assert(walletCode && keccak256(walletCode) === walletDeployment.runtimeCodeHash);
+const walletSource = await json(`https://scan.botchain.ai/api/v2/smart-contracts/${walletOverview.registry}`);
+assert(walletSource.is_verified);
+assert.equal(walletSource.source_code.trim(), (await readFile("contracts/src/MultiReporterIncidentRegistry.sol", "utf8")).trim());
+const participantTransactions = [];
+for (const item of walletOverview.events) {
+  const hash = item.transactionHash as Hex;
+  const [transaction, receipt, explorer] = await Promise.all([
+    client.getTransaction({ hash }), client.getTransactionReceipt({ hash }), json(`https://scan.botchain.ai/api/v2/transactions/${hash}`)
+  ]);
+  assert.equal(receipt.status, "success");
+  assert.equal(transaction.chainId, 677);
+  assert.equal(transaction.blockHash, receipt.blockHash);
+  assert.equal(transaction.value, 0n);
+  assert.equal(transaction.to?.toLowerCase(), walletOverview.registry.toLowerCase());
+  assert.equal(transaction.from.toLowerCase(), item.reporter.toLowerCase());
+  const source = walletOverview.sources.find(source => source.id === item.sourceIncidentId);
+  const ownRecord = walletOverview.records.find(record => record.id === item.incidentId && record.reporter.toLowerCase() === item.reporter.toLowerCase());
+  assert(source && ownRecord);
+  assert.equal(ownRecord.reportKey, source.reportKey);
+  assert.equal(ownRecord.endpointId, source.endpointId);
+  assert.equal(ownRecord.openingEvidence, source.openingEvidence);
+  const isOpening = item.action === "openIncident";
+  const expectedDigest = isOpening ? source.openingEvidence : source.recoveryEvidence;
+  assert.equal(item.evidenceHash, expectedDigest);
+  if (!isOpening) {
+    assert.equal(ownRecord.status, 1);
+    assert.equal(ownRecord.recoveryEvidence, expectedDigest);
+  }
+  const decoded = decodeFunctionData({ abi: walletRegistryAbi, data: transaction.input });
+  assert.equal(decoded.functionName, item.action);
+  assert.deepEqual(decoded.args, isOpening ? [source.reportKey, source.endpointId, source.severity, expectedDigest] : [BigInt(item.incidentId), expectedDigest]);
+  const logs = parseEventLogs({ abi: walletRegistryAbi, logs: receipt.logs, strict: true }).filter(log => log.address.toLowerCase() === walletOverview.registry!.toLowerCase() && log.eventName === (isOpening ? "IncidentOpened" : "IncidentResolved"));
+  assert.equal(logs.length, 1);
+  const event = logs[0];
+  assert(event.eventName === "IncidentOpened" || event.eventName === "IncidentResolved");
+  assert.equal(event.args.incidentId, BigInt(item.incidentId));
+  assert.equal(event.args.reporter.toLowerCase(), item.reporter.toLowerCase());
+  assert.equal(event.args.endpointId, source.endpointId);
+  if (event.eventName === "IncidentOpened") {
+    assert.equal(event.args.evidenceHash, expectedDigest);
+    assert.equal(event.args.reportKey, source.reportKey);
+    assert.equal(event.args.severity, source.severity);
+  } else if (event.eventName === "IncidentResolved") assert.equal(event.args.resolutionHash, expectedDigest);
+  assert.equal(explorer.result, "success");
+  assert.equal(explorer.method, item.action);
+  assert.equal(explorer.block_number, Number(receipt.blockNumber));
+  assert.equal(explorer.from.hash.toLowerCase(), item.reporter.toLowerCase());
+  assert.equal(explorer.to.hash.toLowerCase(), walletOverview.registry.toLowerCase());
+  const evidenceResponse = await fetch(`${base}/bot/api/evidence/${expectedDigest}`, { signal: AbortSignal.timeout(30000) });
+  assert(evidenceResponse.ok);
+  const canonical = await evidenceResponse.text();
+  const bundle = evidenceSchema.parse(JSON.parse(canonical));
+  assert.equal(canonical, canonicalize(bundle));
+  assert.equal(keccak256(stringToHex(canonical)), expectedDigest);
+  assert.equal(bundle.incidentId, source.id);
+  assert.equal(bundle.endpointId, source.endpointId);
+  assert.equal(bundle.reportKey, source.reportKey);
+  assert.equal(bundle.transition, isOpening ? "open" : "resolve");
+  assert.equal(bundle.simulated, source.simulated);
+  participantTransactions.push({ action: item.action, transactionHash: hash, status: receipt.status, from: transaction.from, to: transaction.to,
+    blockNumber: receipt.blockNumber.toString(), blockHash: receipt.blockHash, paidFeeBOT: formatEther(receipt.gasUsed * receipt.effectiveGasPrice),
+    evidenceHash: expectedDigest, sourceIncidentId: source.id, sourceObservedAt: source.observedAt, simulated: source.simulated,
+    canonicalEvidenceVerified: true, matchingContractStateAndEvent: true, explorerVerified: true, explorer: `https://scan.botchain.ai/tx/${hash}`,
+    classification: "wallet-approved attestation of retained source; independence confirmed by owner, not proven on chain" });
+}
+const allTransactions = [...transactions, ...participantTransactions];
+assert.equal(new Set(allTransactions.map(item => item.transactionHash.toLowerCase())).size, allTransactions.length);
+const distinctSenderWallets = new Set(allTransactions.map(item => item.from.toLowerCase())).size;
+const met = allTransactions.length >= 5 && distinctSenderWallets >= 3;
+
 await mkdir("docs/evidence", { recursive: true });
-const report = { schema: "pulsegrid.bot-review.v1", checkedAt: new Date().toISOString(), readOnly: true, website: base + "/bot", review: base + "/bot/review",
+const checkedAt = new Date().toISOString();
+const report = { schema: "pulsegrid.bot-review.v2", checkedAt, readOnly: true, website: base + "/bot", review: base + "/bot/review",
   chainId, currentBlock: block.number.toString(), registry, runtimeCodeHash: keccak256(code), reporter, chainIncidentCount: count.toString(),
   incident: drill.website, contractSourceVerified: true, deploymentVerified: true, monitorHeartbeat: overview.monitor.heartbeatAt,
   originalPortaldotConfirmedEvents: original.ledger.confirmed, transactions, permissions,
-  evidenceRequirement: { minimumSuccessfulCoreTransactions: 5, minimumDistinctWallets: 3, verifiedCoreTransactions: transactions.length,
-    distinctSenderWallets: new Set(transactions.map(transaction => transaction.from.toLowerCase())).size, met: false,
-    blocker: "Immutable single-reporter authorization; independent participants not arranged. Controlled drill evidence is not independent adoption." } };
-await writeFile("docs/evidence/bot-review-2026-11-09.json", JSON.stringify(report, null, 2) + "\n");
+  walletReporting: { registry: walletOverview.registry, runtimeCodeHash: keccak256(walletCode), sourceVerified: true,
+    chainIncidentCount: walletOverview.chainIncidentCount, completeEventHistory: walletOverview.completeEventHistory, transactions: participantTransactions },
+  evidenceRequirement: { minimumSuccessfulCoreTransactions: 5, minimumDistinctWallets: 3, verifiedCoreTransactions: allTransactions.length,
+    distinctSenderWallets, met, blocker: met ? null : "Additional successful wallet-approved core attestations are required.",
+    note: "Counts exclude deployments, permissions and gas grants. Retained drill attestations do not establish new outages or independent monitoring." } };
+await writeFile(`docs/evidence/bot-review-${checkedAt.slice(0, 10)}.json`, JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify(report, null, 2));

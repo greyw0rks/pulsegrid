@@ -15,20 +15,40 @@ const browser = await chromium.launch({ headless: true, args: ["--no-sandbox"] }
 const findings = [];
 try {
   for (const width of [1280, 390, 360]) {
+    const chosenWallet = width === 1280 ? "MetaMask" : "Rabby";
     const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: "reduce" });
     const page = await context.newPage();
     const errors: string[] = [];
     page.on("pageerror", error => errors.push(error.message));
     let sent = 0, confirmed = 0, receiptState = "pending", tampered = true;
     await context.exposeBinding("fixtureWalletSend", () => { sent++; return sent === 1 ? openingTx : recoveryTx; });
-    await context.addInitScript(`window.ethereum = {
-      request: async function(input) {
-        if (input.method === 'eth_chainId') return '0x2a5';
-        if (input.method === 'eth_requestAccounts' || input.method === 'eth_accounts') return [${JSON.stringify(walletReporters[1])}];
-        if (input.method === 'eth_sendTransaction') return window.fixtureWalletSend();
-        throw new Error('Unexpected wallet request: ' + input.method);
-      }, on: function() {}, removeListener: function() {}
-    };`);
+    await context.addInitScript(`
+      function makeProvider() {
+        var chain = '0x1', handlers = {};
+        return {
+          request: async function(input) {
+            if (input.method === 'eth_chainId') return chain;
+            if (input.method === 'eth_requestAccounts' || input.method === 'eth_accounts') return [${JSON.stringify(walletReporters[1])}];
+            if (input.method === 'wallet_switchEthereumChain') {
+              chain = '0x2a5';
+              setTimeout(function() {
+                if (handlers.chainChanged) handlers.chainChanged('0x2a5');
+                if (handlers.accountsChanged) handlers.accountsChanged([${JSON.stringify(walletReporters[1])}]);
+              }, 100);
+              return null;
+            }
+            if (input.method === 'eth_sendTransaction') return window.fixtureWalletSend();
+            throw new Error('Unexpected wallet request: ' + input.method);
+          }, on: function(event, handler) { handlers[event] = handler; }, removeListener: function(event) { delete handlers[event]; }
+        };
+      }
+      var metamask = makeProvider(), rabby = makeProvider();
+      window.ethereum = { request: async function() { throw new Error('Wrong global provider selected'); } };
+      window.addEventListener('eip6963:requestProvider', function() {
+        window.dispatchEvent(new CustomEvent('eip6963:announceProvider', { detail: { info: { uuid: 'metamask-fixture', name: 'MetaMask' }, provider: metamask } }));
+        window.dispatchEvent(new CustomEvent('eip6963:announceProvider', { detail: { info: { uuid: 'rabby-fixture', name: 'Rabby' }, provider: rabby } }));
+      });
+    `);
     const overview = (): WalletReportOverview => ({ state: "ready", reason: "Browser fixture: no real signing or chain activity.", registry,
       reporters: walletReporters.map(address => ({ address, enabled: true })), sources: [{ id: sourceId, name: "Controlled fixture source",
         reportKey, endpointId, severity: 2, openingEvidence: opening, recoveryEvidence: recovery, simulated: true,
@@ -53,6 +73,11 @@ try {
     await expect(page.getByText("Contract verified", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: "Attest incident", exact: true })).toBeDisabled();
     await page.getByRole("button", { name: "Connect reporter wallet", exact: true }).click();
+    await expect(page.getByRole("group", { name: "Choose wallet extension" })).toBeVisible();
+    await page.getByRole("button", { name: chosenWallet, exact: true }).click();
+    await expect(page.getByText("Connected:", { exact: false })).toBeVisible();
+    await expect(page.getByText("Connected:", { exact: false })).toContainText(`via ${chosenWallet}`);
+    await page.waitForTimeout(200);
     await expect(page.getByText("Connected:", { exact: false })).toBeVisible();
     await page.getByRole("button", { name: "Attest incident", exact: true }).click();
     await expect(page.getByRole("status")).toContainText("did not match");
@@ -67,6 +92,7 @@ try {
     receiptState = "confirmed";
     await expect(page.getByRole("status")).toContainText("Confirmed on BOT Chain");
     await page.getByRole("button", { name: "Connect reporter wallet", exact: true }).click();
+    await page.getByRole("button", { name: chosenWallet, exact: true }).click();
     await expect(page.getByRole("button", { name: "Attest incident", exact: true })).toBeDisabled();
     await page.getByRole("button", { name: "Attest recovery", exact: true }).click();
     await expect(page.getByRole("link", { name: "Inspect confirmed transaction on BOTScan" })).toHaveAttribute("href", `https://scan.botchain.ai/tx/${recoveryTx}`);
@@ -74,7 +100,7 @@ try {
     expect(sent).toBe(2);
     if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)) throw new Error(`Reports overflow at ${width}px`);
     if (errors.length) throw new Error(errors.join("; "));
-    findings.push({ width, malformedTransactionRejected: true, pendingReloadNoResend: true, ownOpeningAndRecovery: true, exactlyTwoWalletRequests: true, overflow: false, errors });
+    findings.push({ width, chosenWallet, eip6963ExplicitProvider: true, delayedBotChainEventKeepsConnection: true, malformedTransactionRejected: true, pendingReloadNoResend: true, ownOpeningAndRecovery: true, exactlyTwoWalletRequests: true, overflow: false, errors });
     await context.close();
   }
 } finally { await browser.close(); }

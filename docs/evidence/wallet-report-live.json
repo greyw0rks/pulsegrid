@@ -1,11 +1,12 @@
 {
-  "checkedAt": "2026-11-10T20:22:04.112Z",
+  "checkedAt": "2026-11-11T12:01:35.289Z",
   "website": "https://pulsegrid-psi.vercel.app/bot/reports",
   "readOnly": true,
   "findings": [
     {
       "width": 1280,
       "reportsReady": true,
+      "missingExtensionFeedback": true,
       "fiveWalletPermissions": true,
       "historicalDrillLabel": true,
       "incidentAndEvidenceNavigation": true,
@@ -15,6 +16,7 @@
     {
       "width": 390,
       "reportsReady": true,
+      "missingExtensionFeedback": true,
       "fiveWalletPermissions": true,
       "historicalDrillLabel": true,
       "incidentAndEvidenceNavigation": true,
@@ -24,6 +26,7 @@
     {
       "width": 360,
       "reportsReady": true,
+      "missingExtensionFeedback": true,
       "fiveWalletPermissions": true,
       "historicalDrillLabel": true,
       "incidentAndEvidenceNavigation": true,
@@ -34,26 +37,24 @@
   "participantPreflights": [
     {
       "account": "0xBA46d08B9E298E8E70096Fc238Da207139BCCAB7",
-      "maximumFeeBOT": "0.00487436",
-      "evidenceHash": "0xe019843c5778459a02ebdc6ff66d9e9d118083d9e32df3dece174f52b457e1e3",
+      "state": "already_resolved",
       "noSigning": true
     },
     {
       "account": "0xB9e3A2D811729C11F64313F59922Ab37Afa52010",
-      "maximumFeeBOT": "0.00487436",
-      "evidenceHash": "0xe019843c5778459a02ebdc6ff66d9e9d118083d9e32df3dece174f52b457e1e3",
+      "state": "already_resolved",
       "noSigning": true
     },
     {
       "account": "0x0A4Da2520B480A6422aF61c889f16233DFB256B2",
-      "maximumFeeBOT": "0.00487436",
+      "action": "open",
+      "maximumFeeBOT": "0.00447792",
       "evidenceHash": "0xe019843c5778459a02ebdc6ff66d9e9d118083d9e32df3dece174f52b457e1e3",
       "noSigning": true
     },
     {
       "account": "0xc61Bbc0CF5694EF410A578A9833f77C173790450",
-      "maximumFeeBOT": "0.00487436",
-      "evidenceHash": "0xe019843c5778459a02ebdc6ff66d9e9d118083d9e32df3dece174f52b457e1e3",
+      "state": "already_resolved",
       "noSigning": true
     }
   ]

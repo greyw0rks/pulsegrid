@@ -20,6 +20,8 @@ try {
     await expect(page.getByText("Contract verified", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: "Connect reporter wallet", exact: true })).toBeEnabled();
     await expect(page.getByRole("button", { name: "Attest incident", exact: true })).toBeDisabled();
+    await page.getByRole("button", { name: "Connect reporter wallet", exact: true }).click();
+    await expect(page.getByRole("status")).toContainText("No wallet extension was detected");
     await expect(page.getByText("Controlled drill source", { exact: true })).toBeVisible();
     const overviewResponse = await page.request.get(base + "/api/wallet-reports");
     if (!overviewResponse.ok()) throw new Error("Public wallet overview unavailable.");
@@ -33,10 +35,16 @@ try {
       const source = overview.sources[0];
       if (!source) throw new Error("Retained source evidence is missing.");
       for (const account of walletReporters.slice(1)) {
-        const response = await page.request.post(base + "/api/wallet-reports/prepare", { data: { account, incidentId: source.id, action: "open" } });
+        const existing = overview.records.find(record => record.reporter.toLowerCase() === account.toLowerCase() && record.reportKey === source.reportKey);
+        if (existing?.status === 1) {
+          preflights.push({ account, state: "already_resolved", noSigning: true });
+          continue;
+        }
+        const action = existing ? "resolve" : "open";
+        const response = await page.request.post(base + "/api/wallet-reports/prepare", { data: { account, incidentId: source.id, action } });
         const result = await response.json();
         if (!response.ok() || result.transaction.from.toLowerCase() !== account.toLowerCase() || result.transaction.to.toLowerCase() !== overview.registry?.toLowerCase() || result.transaction.value !== "0x0" || !result.simulated || Number(result.maximumFeeBOT) > 0.05) throw new Error(`Participant preflight failed for ${account}: ${JSON.stringify(result)}`);
-        preflights.push({ account, maximumFeeBOT: result.maximumFeeBOT, evidenceHash: result.evidenceHash, noSigning: true });
+        preflights.push({ account, action, maximumFeeBOT: result.maximumFeeBOT, evidenceHash: result.evidenceHash, noSigning: true });
       }
       for (const digest of [source.openingEvidence, source.recoveryEvidence]) {
         if (!digest) throw new Error("Both evidence transitions are required.");
@@ -51,7 +59,7 @@ try {
     await page.getByRole("link", { name: "Inspect source", exact: true }).first().click();
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Digest verified");
     if (errors.length) throw new Error(errors.join("; "));
-    findings.push({ width, reportsReady: true, fiveWalletPermissions: true, historicalDrillLabel: true, incidentAndEvidenceNavigation: true, overflow: false, errors });
+    findings.push({ width, reportsReady: true, missingExtensionFeedback: true, fiveWalletPermissions: true, historicalDrillLabel: true, incidentAndEvidenceNavigation: true, overflow: false, errors });
     await page.close();
   }
 } finally { await browser.close(); }

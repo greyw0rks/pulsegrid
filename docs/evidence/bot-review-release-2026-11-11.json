@@ -1,0 +1,47 @@
+{
+  "schema": "pulsegrid.bot-review-release.v1",
+  "checkedAt": "2026-11-11T12:22:22.114Z",
+  "website": "https://pulsegrid-psi.vercel.app/bot/review",
+  "reportingPage": "https://pulsegrid-psi.vercel.app/bot/reports",
+  "deploymentId": "dpl_2DbtYvU9ALbL4A8c7smjcF855KSb",
+  "readyState": "READY",
+  "validation": {
+    "applicationTests": 62,
+    "typecheck": "passed",
+    "focusedLint": "passed",
+    "localProductionBuild": "passed",
+    "vercelProductionBuild": "passed",
+    "walletProviderBrowserFixtures": "passed",
+    "reviewBrowserWidths": [
+      1280,
+      390,
+      360
+    ],
+    "browserErrors": 0,
+    "horizontalOverflow": false
+  },
+  "receiptEvidence": {
+    "snapshot": "bot-review-2026-11-11.json",
+    "checkedAt": "2026-11-11T12:09:32.572Z",
+    "successfulCoreTransactions": 8,
+    "distinctSenderWallets": 4,
+    "minimumTransactionRequirementMet": true
+  },
+  "socialEvidence": {
+    "snapshot": "bot-social-2026-11-11.json",
+    "checkedAt": "2026-11-11T12:15:20.909Z",
+    "launchAnnouncement": "https://x.com/Greyw0rks/status/2120488726468190656",
+    "qualifyingOriginalProfilePosts": 5
+  },
+  "evidence": {
+    "reviewBrowser": "bot-review-ui.json",
+    "reportingBrowser": "wallet-report-live.json",
+    "mockWalletFixtures": "wallet-report-browser-fixtures.json"
+  },
+  "automaticReportingEnabled": false,
+  "agentSignedOrBroadcastTransactions": false,
+  "agentPublishedSocialPosts": false,
+  "reviewerReply": "../BOT-REVIEW.md",
+  "reviewerDeliveryConfirmed": false,
+  "reviewerAcceptanceConfirmed": false
+}

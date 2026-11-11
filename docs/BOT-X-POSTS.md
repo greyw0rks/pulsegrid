@@ -1,17 +1,19 @@
 # Pulsegrid X copy
 
-All copy below is newly prepared and **unpublished**. Drafts do not satisfy the published-post requirement. Publish through the intended X profile and retain each resulting URL and actual date; do not backdate them. No X publishing connector is available in this session.
+The launch below was published by the user. Five supplied original posts from the personal profile were verified for the review; see [BOT-REVIEW.md](BOT-REVIEW.md). The five additional Pulsegrid drafts below remain unpublished and are optional future copy. No post was sent by this coding session.
 
-## BOT Chain mainnet launch post
+## Published BOT launch post
+
+https://x.com/Greyw0rks/status/2120488726468190656 — published November 11, 2026, 12:08:03 UTC. The original post's short app URL expands to the URL shown below.
 
 ```text
-Pulsegrid is live on BOT Chain mainnet.
+Pulsegrid is live on @BOTChain_ai
 
 Monitor RPC health, inspect incident evidence, and verify recovery receipts.
 
 A controlled drill completed both on-chain attestations.
 
-App + BOTScan proof: https://pulsegrid-psi.vercel.app/bot/review
+App: https://pulsegrid-psi.vercel.app/bot/
 ```
 
 ## Five additional original posts

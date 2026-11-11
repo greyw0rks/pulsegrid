@@ -5,12 +5,10 @@ import { decodeFunctionData, encodeFunctionData, parseEther } from "viem";
 import { appPath } from "@/lib/paths";
 import { formatDate, shortHash } from "@/lib/format";
 import { walletRegistryAbi } from "@/lib/wallet-registry-abi";
+import { connectBotWallet, injectedWallets, watchWallets, walletConnectionError, type WalletProvider, type DetectedWallet } from "@/lib/wallet-provider";
 import type { WalletReportOverview } from "@/lib/wallet-report-types";
 import { StatusBadge } from "./status-badge";
 
-type Provider = { request(input: { method: string; params?: unknown[] }): Promise<unknown>;
-  on?: (event: string, handler: (...args: unknown[]) => void) => void; removeListener?: (event: string, handler: (...args: unknown[]) => void) => void };
-function provider(): Provider | undefined { return (window as Window & { ethereum?: Provider }).ethereum; }
 type Proposal = { error?: string; maximumFeeBOT: string; evidenceHash: string;
   transaction: { from: string; to: string; data: `0x${string}`; value: string; chainId: string; gas: string; gasPrice: string } };
 const storageKey = "pulsegrid:pending-wallet-report:677";
@@ -24,6 +22,15 @@ export function WalletReportsPanel({ initial }: { initial: WalletReportOverview 
   const [pendingHash, setPendingHash] = useState("");
   const [confirmedHash, setConfirmedHash] = useState("");
   const submitting = useRef(false);
+  const connecting = useRef(false);
+  const discovery = useRef<ReturnType<typeof watchWallets> | undefined>(undefined);
+  const activeWallet = useRef<WalletProvider | undefined>(undefined);
+  const connectedAccount = useRef("");
+  const [wallets, setWallets] = useState<DetectedWallet[]>([]);
+  const [walletChoice, setWalletChoice] = useState(false);
+  const [walletName, setWalletName] = useState("");
+  const [connectionNotice, setConnectionNotice] = useState("");
+  const [activeProvider, setActiveProvider] = useState<WalletProvider | undefined>(undefined);
   const refresh = useCallback(async () => {
     const response = await fetch(appPath("/api/wallet-reports"), { cache: "no-store" });
     if (!response.ok) throw new Error("Wallet report records are temporarily unavailable.");
@@ -40,11 +47,26 @@ export function WalletReportsPanel({ initial }: { initial: WalletReportOverview 
       } catch { setNotice("Browser storage is unavailable. Keep each submitted BOTScan link before leaving this page."); }
     }, 0);
     const timer = setInterval(() => void refresh().catch(() => {}), 30000);
-    const changed = () => { setAccount(""); setNotice("Wallet account or network changed. Connect the wallet again before reporting."); };
-    const wallet = provider();
-    wallet?.on?.("accountsChanged", changed); wallet?.on?.("chainChanged", changed);
-    return () => { clearTimeout(initialLoad); clearInterval(timer); wallet?.removeListener?.("accountsChanged", changed); wallet?.removeListener?.("chainChanged", changed); };
+    const watcher = watchWallets(window, setWallets);
+    discovery.current = watcher;
+    const discover = setTimeout(watcher.refresh, 0);
+    return () => { clearTimeout(initialLoad); clearTimeout(discover); clearInterval(timer); watcher.stop(); discovery.current = undefined; };
   }, [refresh]);
+  useEffect(() => {
+    const accountChanged = (...args: unknown[]) => {
+      if (connecting.current) return;
+      const next = Array.isArray(args[0]) ? String(args[0][0] ?? "") : "";
+      if (next.toLowerCase() === connectedAccount.current.toLowerCase()) return;
+      connectedAccount.current = ""; setAccount(""); setConnectionNotice("Wallet account changed. Connect the intended reporter wallet again.");
+    };
+    const chainChanged = (...args: unknown[]) => {
+      try { if (BigInt(String(args[0])) === 677n) return; } catch { /* An unknown network cannot sign reports. */ }
+      if (connecting.current) return;
+      connectedAccount.current = ""; setAccount(""); setConnectionNotice("Wallet network changed. Connect on BOT Chain again before reporting.");
+    };
+    activeProvider?.on?.("accountsChanged", accountChanged); activeProvider?.on?.("chainChanged", chainChanged);
+    return () => { activeProvider?.removeListener?.("accountsChanged", accountChanged); activeProvider?.removeListener?.("chainChanged", chainChanged); };
+  }, [activeProvider]);
   useEffect(() => {
     if (!pendingHash) return;
     let stopped = false;
@@ -69,30 +91,27 @@ export function WalletReportsPanel({ initial }: { initial: WalletReportOverview 
   const source = data.sources.find(source => source.id === selection);
   const ownRecord = data.records.find(record => record.reporter.toLowerCase() === account.toLowerCase() && record.reportKey === source?.reportKey);
   const allowed = data.reporters.some(reporter => reporter.address.toLowerCase() === account.toLowerCase() && reporter.enabled);
-  async function connect() {
-    const wallet = provider();
-    if (!wallet) { setNotice("Open this page in a browser with an EVM wallet extension to report."); return; }
+  async function connect(chosen?: DetectedWallet) {
+    if (connecting.current || submitting.current || pendingHash) return;
+    const available = discovery.current?.refresh() ?? injectedWallets(window);
+    setWallets(available);
+    if (!chosen && available.length > 1) { setWalletChoice(true); setConnectionNotice("Choose the extension that holds your approved reporter address."); return; }
+    const selected = chosen ?? available[0];
+    if (!selected) { setConnectionNotice("No wallet extension was detected. Enable and unlock MetaMask or Rabby, reload this page, then connect again."); return; }
+    const wallet = selected.provider;
+    activeWallet.current = wallet; setActiveProvider(wallet); setWalletName(selected.name); setWalletChoice(false);
+    connecting.current = true;
     setBusy(true);
+    setConnectionNotice(`Open ${selected.name}, unlock it, and approve the connection request. Then approve BOT Chain if prompted.`);
     try {
-      const accounts = await wallet.request({ method: "eth_requestAccounts" }) as string[];
-      if (!accounts[0]) throw new Error("No wallet account was selected.");
-      const network = await wallet.request({ method: "eth_chainId" });
-      if (BigInt(network as string) !== 677n) {
-        try { await wallet.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x2a5" }] }); }
-        catch (error) {
-          if ((error as { code?: number }).code !== 4902) throw error;
-          await wallet.request({ method: "wallet_addEthereumChain", params: [{ chainId: "0x2a5", chainName: "BOT Chain mainnet", nativeCurrency: { name: "BOT", symbol: "BOT", decimals: 18 }, rpcUrls: ["https://rpc.botchain.ai"], blockExplorerUrls: ["https://scan.botchain.ai"] }] });
-          if (BigInt(await wallet.request({ method: "eth_chainId" }) as string) !== 677n) await wallet.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x2a5" }] });
-        }
-      }
-      const current = await wallet.request({ method: "eth_accounts" }) as string[];
-      if (!current[0] || BigInt(await wallet.request({ method: "eth_chainId" }) as string) !== 677n) throw new Error("Wallet or network selection changed.");
-      setAccount(current[0]); setNotice(""); await refresh();
-    } catch { setNotice("Wallet connection or BOT Chain network selection was not completed."); }
-    finally { setBusy(false); }
+      const address = await connectBotWallet(wallet);
+      connectedAccount.current = address; setAccount(address); setConnectionNotice("");
+      await refresh().catch(() => setConnectionNotice("Wallet connected. Registry records are temporarily unavailable; retry shortly."));
+    } catch (error) { connectedAccount.current = ""; setAccount(""); setConnectionNotice(walletConnectionError(error)); }
+    finally { connecting.current = false; setBusy(false); }
   }
   async function submit(action: "open" | "resolve") {
-    const wallet = provider();
+    const wallet = activeWallet.current;
     if (!wallet || !source || !account || !data.registry || submitting.current || pendingHash) return;
     submitting.current = true;
     setBusy(true); setConfirmedHash("");
@@ -132,7 +151,9 @@ export function WalletReportsPanel({ initial }: { initial: WalletReportOverview 
       <div className="deployment-content"><p>{data.reason}</p>
         {data.registry ? <p className="mono">Registry: <a href={`https://scan.botchain.ai/address/${data.registry}?tab=contract`}>{shortHash(data.registry)}</a></p> : null}
         <button className="button button-primary" type="button" onClick={() => void connect()} disabled={busy || !!pendingHash || data.state !== "ready"}>{account ? "Change connected wallet" : "Connect reporter wallet"}</button>
-        {account ? <p className="section-note">Connected: <span className="mono">{shortHash(account)}</span> · {allowed ? "Approved reporter" : "Not approved for new reports"}</p> : null}
+        {walletChoice ? <div className="landing-actions" role="group" aria-label="Choose wallet extension">{wallets.map(wallet => <button key={wallet.id} className="button" type="button" disabled={busy || !!pendingHash} onClick={() => void connect(wallet)}>{wallet.name}</button>)}</div> : null}
+        {connectionNotice ? <p className="section-note" role="status">{connectionNotice}</p> : null}
+        {account ? <p className="section-note">Connected: <span className="mono">{shortHash(account)}</span> via {walletName} · {allowed ? "Approved reporter" : "Not approved for new reports"}</p> : null}
         <details className="section"><summary>Approved reporter addresses</summary><ul>{data.reporters.map(reporter => <li key={reporter.address} className="mono"><a href={`https://scan.botchain.ai/address/${reporter.address}`}>{reporter.address}</a> · {reporter.enabled ? "enabled" : "disabled"}</li>)}</ul></details>
       </div>
     </section>

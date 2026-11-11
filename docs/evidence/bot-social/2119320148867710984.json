@@ -1,0 +1,46 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 0,
+  "lang": "en",
+  "created_at": "2026-11-08T06:44:33.000Z",
+  "display_text_range": [
+    0,
+    109
+  ],
+  "entities": {
+    "user_mentions": [
+      {
+        "id_str": "1478679005788311552",
+        "indices": [
+          37,
+          48
+        ],
+        "name": "ElevenLabs",
+        "screen_name": "ElevenLabs"
+      }
+    ]
+  },
+  "id_str": "2119320148867710984",
+  "text": "Tip for hackathon builders \n\nPay for @ElevenLabs \n\nYou can afford claude and codex, you can afford another $6",
+  "user": {
+    "id_str": "992758913144709120",
+    "name": "Grey",
+    "screen_name": "Greyw0rks",
+    "is_blue_verified": false,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/2012170442220670976/C4ad8hrP_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": [
+      "2119320148867710984"
+    ],
+    "editable_until_msecs": "1794123873000",
+    "edits_remaining": "5",
+    "is_edit_eligible": true
+  },
+  "conversation_count": 0,
+  "news_action_type": "conversation",
+  "isEdited": false,
+  "isStaleEdit": false
+}

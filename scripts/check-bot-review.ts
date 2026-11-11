@@ -23,6 +23,10 @@ try {
     await expect(page.getByText("Confirmed receipt retained", { exact: true })).toHaveCount(2);
     await expect(page.locator("main a[href^='https://scan.botchain.ai/tx/']")).toHaveCount(2);
     await expect(page.getByText("The review requires at least five successful core transactions across three wallets.", { exact: false })).toBeVisible();
+    await expect(page.getByText("Transaction requirement met", { exact: true })).toBeVisible();
+    const social = page.locator("section[aria-labelledby='social-heading']");
+    await expect(social.getByRole("link", { name: "Read the Pulsegrid BOT launch announcement", exact: true })).toHaveAttribute("href", "https://x.com/Greyw0rks/status/2120488726468190656");
+    await expect(social.locator("ul a")).toHaveCount(5);
     await expect(page.getByRole("link", { name: "Download canonical JSON", exact: true })).toHaveCount(2);
     const jsonHref = await page.getByRole("link", { name: "Download canonical JSON", exact: true }).first().getAttribute("href");
     if (!jsonHref?.startsWith("/bot/api/evidence/")) throw new Error("Evidence URL escaped BOT base path");
@@ -37,7 +41,7 @@ try {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Digest verified");
     if (errors.length) throw new Error(`Browser errors: ${errors.join("; ")}`);
     findings.push({ width, landingReviewLink: true, externalNetworkLinks: true, twoReceiptLinks: true, reporterRestrictionVisible: true,
-      basePathPreserved: true, incidentNavigation: true, evidenceDownload: true, evidenceDigestVerified: true, overflow: false, errors });
+      transactionRequirementMet: true, publishedLaunchAndFiveProfileLinks: true, basePathPreserved: true, incidentNavigation: true, evidenceDownload: true, evidenceDigestVerified: true, overflow: false, errors });
     await page.close();
   }
 } finally { await browser.close(); }
